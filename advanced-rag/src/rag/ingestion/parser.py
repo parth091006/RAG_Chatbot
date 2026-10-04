@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+import argparse
+import sys
 from pathlib import Path
 
 
@@ -20,3 +22,23 @@ def extract_text_from_pdf(file_path: str | Path) -> str:
         text = page.extract_text() or ""
         pages.append(text)
     return "\n\n".join(pages)
+
+
+def main() -> None:
+    parser = argparse.ArgumentParser(description="Extract text from a PDF file.")
+    parser.add_argument("pdf_path", help="Path to the PDF file to parse")
+    args = parser.parse_args()
+
+    try:
+        text = extract_text_from_pdf(args.pdf_path)
+        try:
+            sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+        except (AttributeError, ValueError):
+            pass
+        print(text)
+    except Exception as exc:  # pragma: no cover - command-line safety
+        parser.exit(status=1, message=f"Error: {exc}\n")
+
+
+if __name__ == "__main__":
+    main()

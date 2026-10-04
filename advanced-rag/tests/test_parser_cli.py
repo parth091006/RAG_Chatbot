@@ -14,4 +14,4 @@ def test_parser_module_requires_pdf_path() -> None:
     )
 
     assert result.returncode != 0
-    assert "Usage:" in result.stdout
+    assert "pdf_path" in result.stderr
