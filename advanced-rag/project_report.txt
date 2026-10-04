@@ -1,0 +1,1414 @@
+# Advanced RAG Research Assistant
+
+## 1. Executive Summary
+
+This project is an Advanced Retrieval-Augmented Generation (RAG) Research Assistant built for research-paper analysis. It allows users to upload PDFs, ask questions about the documents, compare multiple sources, and receive grounded answers with citations.
+
+The system is designed to go beyond a simple "chat with PDF" workflow. It includes:
+
+- PDF ingestion and parsing
+- Text and metadata extraction
+- Intelligent chunking
+- Embedding generation
+- Dense vector search
+- Sparse keyword retrieval
+- Hybrid retrieval
+- Reranking
+- Citation tracking
+- Multi-document QA
+- Cross-document comparison
+- Retrieval and generation evaluation
+- Tracing and observability
+- REST API exposure
+- Dockerized deployment
+
+The core idea is to combine a model's generative ability with a retrieval system that supplies relevant, verifiable evidence from external documents. In RAG, the model is not expected to rely only on its pretrained memory; it is grounded in retrieved context.
+
+The end goal is to build, evaluate, expose, and containerize a complete RAG system:
+
+Ingestion → chunking → embeddings → retrieval → generation → evaluation/tracing → API → Docker
+
+---
+
+## 2. Project Goal
+
+### Project title
+Advanced RAG Research Assistant
+
+### Primary objective
+Build an application that can answer questions using research papers while providing evidence for every answer.
+
+### Example scenario
+A user uploads:
+
+- attention_is_all_you_need.pdf
+- bert.pdf
+- gpt2.pdf
+- llama.pdf
+
+Then asks:
+
+> Compare the training objectives of BERT, GPT-2, and LLaMA.
+
+The system should follow this pipeline:
+
+Question → query analysis → hybrid retrieval → candidate documents → reranking → relevant evidence → LLM → comparison → citations
+
+The answer should be grounded in the retrieved sources, not just the model's prior knowledge.
+
+Example output:
+
+| Aspect | BERT | GPT-2 | LLaMA |
+| --- | --- | --- | --- |
+| Architecture | Encoder | Decoder | Decoder |
+| Objective | Masked LM | Autoregressive LM | Autoregressive LM |
+| Evidence | BERT p. X | GPT-2 p. X | LLaMA p. X |
+
+---
+
+## 3. Why This Is a Strong Project
+
+A basic PDF chatbot is common, but this project goes much further. It covers the full RAG lifecycle:
+
+- NLP
+- Information retrieval
+- Vector search
+- Embeddings
+- LLMs
+- Reranking
+- Evaluation
+- Backend engineering
+- Deployment
+
+This makes it a strong learning project because it combines AI engineering, retrieval systems, backend work, evaluation, and deployment.
+
+It is far more valuable than simply building:
+
+Upload PDF → ask ChatGPT
+
+---
+
+## 4. Final System Architecture
+
+The project architecture can be visualized as:
+
+```text
+PDF Upload
+   ↓
+PDF Processing (text + metadata)
+   ↓
+Chunking
+   ↓
+Embeddings
+   ↓
+Vector Database
+   ↓
+User Question
+   ↓
+Query Processing
+   ├── Dense Retrieval
+   └── BM25 / Sparse Retrieval
+   ↓
+Hybrid Fusion
+   ↓
+Reranker
+   ↓
+Top-K Evidence
+   ↓
+LLM (answer generation)
+   ↓
+Answer + Sources
+   ├── Tracing
+   └── Evaluation
+   ↓
+FastAPI
+   ↓
+Docker
+```
+
+The main processing flow is:
+
+1. Documents are ingested and parsed.
+2. Text is split into chunks.
+3. Chunks are converted into embeddings.
+4. The vector store stores the chunks and metadata.
+5. The query is processed and matched against the index.
+6. Dense and sparse retrieval results are combined.
+7. Reranking selects the strongest evidence.
+8. The LLM generates a grounded answer.
+9. Citations, traces, and evaluation metrics are tracked.
+10. The application is exposed through an API and containerized.
+
+---
+
+## 5. Project Scope
+
+### Core features
+
+#### A. Document ingestion
+- PDF upload
+- PDF parsing
+- Text extraction
+- Page extraction
+- Metadata preservation
+- Document ID generation
+- Duplicate detection
+
+#### B. Chunking
+- Fixed-size chunking
+- Overlap support
+- Recursive chunking
+- Metadata-aware chunks
+- Later: semantic and section-aware chunking
+
+#### C. Embeddings
+Chunks are converted into dense vector representations:
+
+Text → embedding model → vector
+
+#### D. Retrieval
+The system should support:
+
+1. Dense vector retrieval
+2. Sparse/keyword retrieval
+3. Hybrid retrieval
+
+#### E. Reranking
+Retrieve a broader candidate set, then rerank to keep only the strongest evidence.
+
+#### F. Generation
+The LLM generates answers using retrieved context rather than free-form memory alone.
+
+#### G. Citations
+Every answer should be traceable to:
+
+- document
+- page
+- chunk
+
+#### H. Multi-document reasoning
+The system should support questions spanning multiple documents.
+
+#### I. Comparison
+The project should compare documents across dimensions such as:
+
+- architecture
+- methodology
+- dataset
+- results
+- advantages
+- limitations
+- training
+- evaluation
+
+#### J. Evaluation
+Measure both retrieval quality and generation quality.
+
+#### K. Tracing
+Track every stage of a query.
+
+#### L. API
+Expose the system through REST endpoints.
+
+#### M. Docker
+Containerize the entire application.
+
+---
+
+## 6. What to Learn Before Building
+
+Don't try to learn everything about AI at once. Focus on the essentials first.
+
+### Python foundation
+You should be comfortable with:
+
+- functions
+- classes
+- lists and dictionaries
+- file handling
+- exceptions
+- type hints
+- virtual environments
+- package management
+- JSON
+- HTTP requests
+- async basics
+
+### NLP fundamentals
+Understand:
+
+- tokenization
+- embeddings
+- semantic similarity
+- cosine similarity
+- dot product
+- Euclidean distance
+
+Example:
+
+```text
+"Transformers are powerful"
+        ↓
+["Transformers", "are", "powerful"]
+```
+
+Token counts matter because they directly affect cost, latency, and chunk design.
+
+---
+
+## 7. Information Retrieval Fundamentals
+
+This is one of the most important areas for the project.
+
+### Sparse retrieval
+Keyword-based retrieval using methods such as:
+
+- TF-IDF
+- BM25
+
+### Dense retrieval
+Semantic retrieval where a query is embedded and matched against document embeddings.
+
+### Hybrid retrieval
+Combines both:
+
+- dense retrieval
+- sparse retrieval
+
+This is useful because semantic search and keyword search each have different strengths.
+
+Production RAG systems often rely on:
+
+- metadata filtering
+- hybrid search
+- reranking
+- chunk optimization
+
+---
+
+## 8. Vector Databases
+
+You should understand:
+
+- vectors
+- indexes
+- similarity search
+- metadata
+- top-k retrieval
+- filtering
+- persistence
+
+For a learning-focused version, FAISS is a great starting point because it exposes the fundamentals clearly.
+
+Recommended learning progression:
+
+FAISS → persistent vector store → production vector DB
+
+Avoid jumping into a complex distributed vector database too early.
+
+---
+
+## 9. RAG Fundamentals
+
+The difference between a plain LLM and a RAG system is essential:
+
+### Plain LLM
+Question → LLM → answer
+
+### RAG
+Question → retriever → relevant evidence → LLM → answer
+
+In RAG, the model receives external knowledge as context before generating the answer.
+
+---
+
+## 10. Development Strategy
+
+The project should be built in phases instead of trying to implement everything at once.
+
+### Version 0 — Environment
+Goal: create a clean Python project.
+
+Suggested structure:
+
+```text
+advanced-rag/
+├── README.md
+├── pyproject.toml
+├── .env.example
+├── .gitignore
+├── data/
+│   ├── raw/
+│   ├── processed/
+│   └── evaluation/
+├── src/
+│   └── rag/
+├── tests/
+├── notebooks/
+└── docker/
+```
+
+Focus on:
+
+- virtual environments
+- Git
+- package management
+- environment variables
+
+### Version 1 — PDF ingestion
+Goal: convert a PDF into structured document content.
+
+Expected output:
+
+```text
+Document
+├── page
+├── text
+└── metadata
+```
+
+Example internal representation:
+
+```json
+{
+  "document_id": "doc_001",
+  "filename": "attention.pdf",
+  "page": 3,
+  "text": "..."
+}
+```
+
+Important metadata to keep:
+
+- document_id
+- document_name
+- page_number
+- chunk_id
+- section
+- source
+
+### Version 2 — Chunking
+Goal: split documents into manageable chunks.
+
+Example chunk IDs:
+
+- doc_001_page_1_chunk_1
+- doc_001_page_1_chunk_2
+- doc_001_page_2_chunk_1
+
+Start with:
+
+- 500–800 tokens per chunk
+- 10–20% overlap
+
+These are starting values, not final assumptions.
+
+### Version 3 — Embeddings
+Goal: convert each chunk into a vector.
+
+Pipeline:
+
+Chunk → embedding model → vector
+
+Store:
+
+- chunk_id
+- embedding
+- text
+- metadata
+
+### Version 4 — Vector retrieval
+Goal: retrieve the most relevant chunks for a question.
+
+Question → embedding → vector search → top-k chunks
+
+### Version 5 — Basic RAG
+Goal: connect the retriever to an LLM.
+
+Question → retriever → relevant chunks → prompt → LLM → answer
+
+Prompt instructions should require:
+
+- answer using only the supplied context
+- say when information is missing
+- do not invent facts
+- include citations
+
+### Version 6 — Citations
+Goal: make outputs traceable.
+
+Each chunk should carry:
+
+- document
+- page
+- chunk_id
+
+Then answers can include references such as:
+
+- [1] Attention Is All You Need — Page 3
+- [2] Attention Is All You Need — Page 4
+
+### Version 7 — Multi-document RAG
+Goal: support more than one paper in the index.
+
+Example question:
+
+> What approaches to positional encoding are discussed across these papers?
+
+### Version 8 — Metadata filtering
+Add filters such as:
+
+- document
+- author
+- year
+- topic
+- page
+- section
+
+This enables richer retrieval workflows.
+
+### Version 9 — Hybrid retrieval
+Add BM25 alongside dense search.
+
+Pipeline:
+
+Query → dense retrieval + BM25 → score fusion → candidates
+
+This helps with both semantic and exact-term matching.
+
+### Version 10 — Reranking
+Use a second-stage reranker to reduce a large candidate pool down to the best few chunks before generation.
+
+### Version 11 — Multi-document comparison
+The system should compare multiple papers and structure the output clearly.
+
+Example:
+
+- Architecture
+- Training objective
+- Limitations
+- Similarities and differences
+
+### Version 12 — Evaluation
+Treat evaluation as a core project goal, not an afterthought.
+
+Use a dataset of questions, expected sources, and expected answers.
+
+---
+
+## 11. Evaluation Strategy
+
+### 11.1 Retrieval metrics
+Important metrics include:
+
+- Recall@K
+- Precision@K
+- MRR
+- nDCG
+
+These tell you whether the retriever is finding the right evidence.
+
+### 11.2 Generation metrics
+Measure:
+
+- faithfulness
+- answer relevance
+- correctness
+- citation correctness
+
+### 11.3 Example evaluation matrix
+
+| Configuration | Recall@5 | MRR | Faithfulness | Answer relevance |
+| --- | ---: | ---: | ---: | ---: |
+| Vector | 78% | 0.71 | 84% | 82% |
+| BM25 | 72% | 0.68 | 80% | 79% |
+| Hybrid | 86% | 0.81 | 89% | 88% |
+| Hybrid + reranker | 92% | 0.88 | 94% | 93% |
+
+These are example values, not targets.
+
+---
+
+## 12. Evaluation Dashboard
+
+A simple dashboard should show:
+
+### System metrics
+- documents
+- chunks
+- queries evaluated
+
+### Retrieval metrics
+- Recall@5
+- Recall@10
+- MRR
+- nDCG
+
+### Generation metrics
+- faithfulness
+- answer relevance
+- citation accuracy
+
+### Performance metrics
+- average latency
+- p95 latency
+- embedding latency
+- retrieval latency
+- LLM latency
+
+### Cost metrics
+- input tokens
+- output tokens
+- embedding tokens
+- estimated cost per query
+
+---
+
+## 13. Tracing and Observability
+
+Each query should generate a trace such as:
+
+```text
+QUERY
+├── Query preprocessing
+├── Embedding
+├── Dense retrieval
+│   └── 20 results
+├── BM25
+│   └── 20 results
+├── Fusion
+│   └── 30 unique candidates
+├── Reranking
+│   └── Top 5
+├── Prompt construction
+├── LLM generation
+└── Citation validation
+```
+
+Timing data should be recorded for:
+
+- embedding time
+- vector search time
+- BM25 time
+- reranking time
+- LLM time
+- total request time
+
+This helps identify bottlenecks.
+
+---
+
+## 14. API Design
+
+Once the core system works, expose it using FastAPI.
+
+### Suggested endpoints
+
+- GET /health
+- POST /documents
+- GET /documents
+- DELETE /documents/{document_id}
+- POST /query
+- POST /compare
+- POST /evaluate
+- GET /metrics
+
+### Example payloads
+
+#### Upload document
+```json
+{
+  "document_id": "doc_001",
+  "filename": "attention.pdf",
+  "pages": 15,
+  "chunks": 123
+}
+```
+
+#### Query request
+```json
+{
+  "question": "What is multi-head attention?"
+}
+```
+
+#### Query response
+```json
+{
+  "answer": "...",
+  "citations": [
+    {
+      "document": "attention.pdf",
+      "page": 4,
+      "chunk_id": "doc1_p4_c2"
+    }
+  ]
+}
+```
+
+---
+
+## 15. Docker and Deployment
+
+The application should eventually run in a container.
+
+Conceptually:
+
+```text
+Docker Image
+├── Python
+├── Dependencies
+├── RAG code
+├── API
+└── Configuration
+```
+
+Typical commands:
+
+```bash
+docker build .
+docker run ...
+```
+
+This is the final step that makes the system portable and deployable.
+
+---
+
+## 16. Recommended Technology Stack
+
+Keep the initial stack simple and focused.
+
+### Programming
+- Python
+
+### PDF parsing
+- PyMuPDF
+- pypdf
+
+### Embeddings
+- OpenAI embeddings
+- Sentence Transformers
+
+### Vector search
+- FAISS initially
+- later: Qdrant, Pinecone, Weaviate, Milvus, or pgvector
+
+### Sparse retrieval
+- BM25
+
+### Reranking
+- cross-encoder / reranker model
+
+### LLM
+- API-based model for the first version
+
+### API
+- FastAPI
+
+### Frontend
+- Streamlit first
+- React/Next.js later if needed
+
+### Deployment
+- Docker
+
+---
+
+## 17. Recommended Code Structure
+
+```text
+advanced-rag/
+├── README.md
+├── LICENSE
+├── pyproject.toml
+├── .env.example
+├── .gitignore
+├── Dockerfile
+├── compose.yaml
+├── data/
+│   ├── raw/
+│   ├── processed/
+│   └── evaluation/
+├── src/
+│   └── rag/
+│       ├── config/
+│       │   └── settings.py
+│       ├── ingestion/
+│       │   ├── loader.py
+│       │   ├── parser.py
+│       │   └── metadata.py
+│       ├── chunking/
+│       │   ├── chunker.py
+│       │   └── strategies.py
+│       ├── embeddings/
+│       │   └── embedder.py
+│       ├── retrieval/
+│       │   ├── dense.py
+│       │   ├── sparse.py
+│       │   ├── hybrid.py
+│       │   └── reranker.py
+│       ├── generation/
+│       │   ├── prompts.py
+│       │   └── generator.py
+│       ├── citations/
+│       │   └── citation_manager.py
+│       ├── comparison/
+│       │   └── comparator.py
+│       ├── evaluation/
+│       │   ├── datasets.py
+│       │   ├── retrieval_metrics.py
+│       │   └── generation_metrics.py
+│       ├── tracing/
+│       │   └── tracer.py
+│       └── api/
+│           ├── main.py
+│           └── routes/
+├── tests/
+│   ├── test_ingestion.py
+│   ├── test_chunking.py
+│   ├── test_retrieval.py
+│   ├── test_citations.py
+│   └── test_api.py
+├── notebooks/
+│   ├── chunking_experiments.ipynb
+│   ├── retrieval_experiments.ipynb
+│   └── evaluation.ipynb
+└── dashboard/
+```
+
+Do not create all directories on day one. Grow the project as the system evolves.
+
+---
+
+## 18. Data Model
+
+The chunk object is one of the most important design decisions.
+
+```python
+Chunk(
+    chunk_id="doc_001_p03_c02",
+    document_id="doc_001",
+    document_name="attention.pdf",
+    page_number=3,
+    section="3.2 Attention",
+    text="...",
+    embedding=[...],
+)
+```
+
+This single object supports:
+
+- retrieval
+- filtering
+- citations
+- evaluation
+- tracing
+
+---
+
+## 19. Prompt Architecture
+
+Do not use one giant prompt for everything.
+
+### QA prompt
+Instructions should say:
+
+- answer using only the supplied evidence
+- say when information is insufficient
+- do not invent information
+- cite the evidence
+
+### Comparison prompt
+Instructions should say:
+
+1. identify evidence for each document
+2. state differences
+3. avoid unsupported inference
+4. attach citations
+
+### No-answer behavior
+If nothing relevant is found, the model should respond with a statement like:
+
+> I couldn't find sufficient evidence in the provided documents to answer this question.
+
+This prevents confident hallucination.
+
+---
+
+## 20. Citation Architecture
+
+The system should not rely on the LLM to invent citations after the fact. Citation support should be built into the pipeline.
+
+For each context item, use a deterministic identifier such as:
+
+```text
+[DOC1-P3-C2]
+```
+
+The backend maps this identifier back to:
+
+- document name
+- page number
+- chunk
+
+This provides a more reliable citation layer.
+
+---
+
+## 21. Failure Cases to Test
+
+A serious RAG project must explicitly test failure modes.
+
+1. Question not present in the documents
+2. Similar but wrong chunk retrieved
+3. Conflicting evidence across documents
+4. Exact numeric questions
+5. Cross-document reasoning
+6. Long questions
+7. Ambiguous questions
+8. Prompt injection inside uploaded PDFs
+
+---
+
+## 22. Security Considerations
+
+Eventually, consider:
+
+- file validation
+- PDF-only uploads
+- MIME/type validation
+- file size checks
+- page count validation
+- prompt injection defense
+- API authentication
+- rate limiting
+- request limits
+- secret handling via .env and .env.example
+
+Treat retrieved document text as untrusted input.
+
+---
+
+## 23. Testing Strategy
+
+Use three levels of testing.
+
+### Unit tests
+- PDF parser
+- chunker
+- retriever
+- citation mapper
+- API validation
+
+### Integration tests
+Check that:
+
+PDF → ingestion → retrieval → generation
+
+works end to end.
+
+### Evaluation tests
+Verify:
+
+- expected evidence vs actual evidence
+- expected answer vs generated answer
+
+---
+
+## 24. Experiment Plan
+
+This is where the project becomes a research-grade system.
+
+### Experiment A — chunk size
+Compare chunk sizes:
+
+- 300 tokens
+- 500 tokens
+- 800 tokens
+- 1200 tokens
+
+Measure:
+
+- Recall@5
+- MRR
+- faithfulness
+- latency
+
+### Experiment B — chunk overlap
+Compare:
+
+- 0%
+- 10%
+- 20%
+
+### Experiment C — retrieval mode
+Compare:
+
+- dense
+- BM25
+- hybrid
+- hybrid + reranker
+
+### Experiment D — top-k values
+Compare K values:
+
+- 3
+- 5
+- 10
+- 20
+
+### Experiment E — embedding model
+Compare at least two embedding models on:
+
+- recall
+- MRR
+- latency
+- cost
+
+### Experiment F — reranker
+Compare:
+
+- no reranker
+- reranker enabled
+
+---
+
+## 25. Research Questions the Project Can Answer
+
+- Does hybrid retrieval consistently outperform dense retrieval?
+- How does chunk size affect retrieval quality?
+- Does reranking improve answer faithfulness?
+- What K value gives the best quality/latency tradeoff?
+- Does metadata filtering improve retrieval?
+- How much does retrieval quality affect final answer quality?
+
+This transforms the project from a simple software app into a small RAG research and engineering study.
+
+---
+
+## 26. Suggested Dataset
+
+Because this is a research assistant, use papers the team understands well.
+
+Examples:
+
+- Transformer papers
+- BERT
+- GPT-2
+- LLaMA
+- RAG papers
+- RL papers
+- CV papers
+- robotics papers
+
+A robotics/AI research assistant would be a particularly cohesive domain.
+
+Possible corpus topics:
+
+- ROS papers
+- SLAM papers
+- robotics papers
+- drone papers
+- reinforcement learning papers
+- LLM papers
+- computer vision papers
+
+---
+
+## 27. User Interface
+
+A minimal interface could include:
+
+```text
+┌─────────────────────────────────────────────┐
+│          RAG RESEARCH ASSISTANT             │
+├─────────────────────────────────────────────┤
+│ Upload Documents                            │
+│ [ attention.pdf ]                           │
+│ [ bert.pdf ]                                │
+│ [ gpt2.pdf ]                                │
+├─────────────────────────────────────────────┤
+│ Ask a question                              │
+│ [ Compare BERT and GPT-2 _____________ ]    │
+│                 [ Ask ]                     │
+├─────────────────────────────────────────────┤
+│ Answer                                      │
+│ BERT uses...                                │
+│ GPT-2 uses...                               │
+│ Sources                                     │
+│ [1] BERT — p. 2                             │
+│ [2] GPT-2 — p. 1                            │
+└─────────────────────────────────────────────┘
+```
+
+This can be implemented first with Streamlit, then upgraded later.
+
+---
+
+## 28. Development Roadmap
+
+A six-phase roadmap is ideal.
+
+### Phase 1 — Foundation
+- Python
+- Git
+- PDF processing
+- embeddings
+- vector search
+
+Goal: understand the mechanics.
+
+### Phase 2 — Basic RAG
+- PDF ingestion
+- chunking
+- embedding
+- vector retrieval
+- LLM answer generation
+
+Goal: a working RAG pipeline.
+
+### Phase 3 — Advanced Retrieval
+- BM25
+- hybrid retrieval
+- reranking
+
+Goal: improve retrieval quality.
+
+### Phase 4 — Research Assistant Features
+- citations
+- multi-document QA
+- comparison
+- metadata filtering
+
+Goal: a useful research assistant.
+
+### Phase 5 — Evaluation
+- dataset
+- metrics
+- experiments
+- dashboard
+
+Goal: validate improvements with evidence.
+
+### Phase 6 — Production
+- FastAPI
+- testing
+- Docker
+- deployment
+
+Goal: production-style delivery.
+
+---
+
+## 29. What Not to Do Early
+
+Avoid starting with:
+
+- LangChain
+- LlamaIndex
+- agents
+- multi-agent systems
+- Graph RAG
+- fine-tuning
+- local LLM deployment
+- Kubernetes
+- microservices
+
+These can come later. The first priority is understanding:
+
+PDF → chunks → embeddings → similarity → retrieval → LLM
+
+If the fundamentals are solid, frameworks become productivity tools rather than magic.
+
+---
+
+## 30. Definition of Done
+
+The project is complete only when it can demonstrate all of the following:
+
+### Ingestion
+- [ ] upload PDF
+- [ ] extract text
+- [ ] preserve page numbers
+- [ ] generate document ID
+- [ ] store metadata
+
+### Chunking
+- [ ] chunk documents
+- [ ] configurable chunk size
+- [ ] configurable overlap
+- [ ] trial different chunk strategies
+
+### Embeddings
+- [ ] generate embeddings
+- [ ] store vectors
+- [ ] retrieve vectors
+
+### Retrieval
+- [ ] dense retrieval
+- [ ] BM25
+- [ ] hybrid retrieval
+- [ ] metadata filtering
+- [ ] top-k configuration
+
+### Reranking
+- [ ] candidate retrieval
+- [ ] reranking
+- [ ] top-n selection
+
+### Generation
+- [ ] context-aware prompting
+- [ ] grounded answers
+- [ ] no-answer behavior
+
+### Citations
+- [ ] document citation
+- [ ] page citation
+- [ ] chunk citation
+- [ ] citation validation
+
+### Multi-document support
+- [ ] search multiple PDFs
+- [ ] cross-document questions
+- [ ] document comparison
+
+### Evaluation
+- [ ] evaluation dataset
+- [ ] Recall@K
+- [ ] MRR
+- [ ] nDCG
+- [ ] faithfulness
+- [ ] answer relevance
+- [ ] citation accuracy
+
+### Observability
+- [ ] trace retrieval
+- [ ] trace reranking
+- [ ] trace generation
+- [ ] latency metrics
+- [ ] token and cost tracking
+
+### API
+- [ ] /documents
+- [ ] /query
+- [ ] /compare
+- [ ] /health
+
+### Deployment
+- [ ] Dockerfile
+- [ ] Docker Compose if needed
+- [ ] environment configuration
+- [ ] container runs successfully
+
+---
+
+## 31. Final Architecture Summary
+
+The completed project should effectively resemble:
+
+```text
+USER
+  │
+  ▼
+Web UI
+  │
+  ▼
+FastAPI
+  │
+  ├───────────────┐
+  │               │
+  ▼               ▼
+Document Pipeline   Query Pipeline
+  │               │
+  ▼               ▼
+PDF Parser       Query Processing
+  │               ├── Dense Search
+  ▼               └── BM25 Search
+Chunking              │
+  │                  ▼
+  ▼            Hybrid Fusion
+Embeddings          │
+  │                 ▼
+  ▼             Reranker
+Vector Database    │
+  │                ▼
+    Relevant Evidence
+                │
+                ▼
+               LLM
+                │
+      ┌─────────┴─────────┐
+      ▼                   ▼
+    Answer             Citations
+```
+
+This architecture captures the full development path: ingest documents, build a retrieval pipeline, ground the model in evidence, evaluate quality, and expose the system through a usable API.
+
+---
+
+## 32. Closing Note
+
+The most important takeaway is this: the real challenge in a RAG project is not just prompting an LLM, but building a reliable retrieval and evidence pipeline. Good chunking, strong retrieval, rigorous evaluation, and deterministic citations are what turn a toy chatbot into a research-grade system.
+
+This project is therefore both a software engineering exercise and a focused AI research project. The most valuable version of it is the one that is disciplined, measurable, and grounded in evidence.
+
+                              │
+                              ▼
+                         User Interface
+
+                              +
+                         ┌────────────┐
+                         │ Evaluation │
+                         └────────────┘
+                              │
+                         ┌────┴─────┐
+                         ▼          ▼
+                      Metrics    Dashboard
+
+                              +
+                         ┌────────────┐
+                         │  Tracing   │
+                         └────────────┘
+
+                              +
+                         ┌────────────┐
+                         │   Docker   │
+                         └────────────┘
+
+33. What Makes This Project Portfolio-Ready?
+Don't write:
+"Built a RAG chatbot using LangChain."
+
+That's too generic.
+Instead, your final README should be able to say something like:
+Advanced RAG Research Assistant
+Designed and implemented an end-to-end research assistant for multi-document scientific PDF analysis. The system performs document ingestion, metadata-aware chunking, dense and sparse retrieval, hybrid search, reranking, grounded generation, citation attribution, and multi-document comparison. A curated evaluation dataset is used to benchmark retrieval and generation quality across different chunking and retrieval configurations. The system exposes a REST API through FastAPI and is containerized with Docker.
+
+Then show your actual experiment results.
+For example:
+                     Recall@5
+Dense                 78%
+BM25                  73%
+Hybrid                86%
+Hybrid + Reranker     92%
+
+Again, those values are illustrative. Your project should produce its own measurements.
+That is much more convincing than simply showing a chatbot UI.
+34. The Most Important Learning Principle
+I want you to follow this rule throughout the project:
+Every component must exist because you can explain the problem it solves.
+
+For example:
+Why embeddings?
+Because keyword matching alone doesn't capture semantic similarity.
+Why BM25?
+Because exact terminology and identifiers can be important.
+Why hybrid retrieval?
+Because dense and sparse retrieval have complementary strengths.
+Why reranking?
+Because initial retrieval is optimized for recall/speed, while reranking can improve precision.
+Why citations?
+Because a research assistant needs provenance.
+Why evaluation?
+Because you need evidence that an architectural change actually improves the system.
+Why tracing?
+Because you need to know where failures and latency originate.
+Why Docker?
+Because the application should be reproducible outside your development machine.
+If you can explain all of those, you won't just have built a RAG project—you'll understand RAG engineering.
+35. Recommended Learning Order for You
+Based on the project you want to build, I would personally make your sequence:
+1. RAG fundamentals
+        ↓
+2. PDF processing
+        ↓
+3. Chunking
+        ↓
+4. Embeddings
+        ↓
+5. Vector similarity
+        ↓
+6. FAISS / vector database
+        ↓
+7. Basic RAG
+        ↓
+8. Prompt engineering for grounded generation
+        ↓
+9. Citations
+        ↓
+10. BM25
+        ↓
+11. Hybrid retrieval
+        ↓
+12. Reranking
+        ↓
+13. Multi-document retrieval
+        ↓
+14. Comparison
+        ↓
+15. Retrieval evaluation
+        ↓
+16. Generation evaluation
+        ↓
+17. Tracing
+        ↓
+18. Evaluation dashboard
+        ↓
+19. FastAPI
+        ↓
+20. Testing
+        ↓
+21. Docker
+        ↓
+22. Deployment
+
+And don't proceed just because you've watched/read about the next topic.
+Proceed when the previous component works in code.
+36. Your First Concrete Milestone
+Don't start by installing 20 libraries.
+Your first target should be:
+Build a command-line RAG system for one PDF.
+
+It should do exactly this:
+paper.pdf
+    ↓
+extract text
+    ↓
+split into chunks
+    ↓
+create embeddings
+    ↓
+store vectors
+    ↓
+
+User:
+"What is the main contribution of this paper?"
+
+    ↓
+
+retrieve top 5 chunks
+    ↓
+display retrieved chunks
+    ↓
+send them to LLM
+    ↓
+generate answer
+    ↓
+show page citations
+
+Once this works, freeze it as:
+RAG v1.0
+
+Then start improving it.
+Your next versions can become:
+v1.0  Basic RAG
+v1.1  Citations
+v1.2  Multi-document
+v1.3  BM25
+v1.4  Hybrid retrieval
+v1.5  Reranking
+v1.6  Comparison
+v1.7  Evaluation
+v1.8  Tracing
+v1.9  API
+v2.0  Docker + deployment

@@ -1,0 +1,14 @@
+services:
+  rag-api:
+    build: .
+    container_name: advanced-rag-api
+    ports:
+      - "8000:8000"
+    environment:
+      APP_NAME: advanced-rag
+      ENVIRONMENT: development
+      API_HOST: 0.0.0.0
+      API_PORT: 8000
+    volumes:
+      - ./data:/app/data
+    restart: unless-stopped
