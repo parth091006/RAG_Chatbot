@@ -1,0 +1,85 @@
+[
+  {
+    "id": "q001",
+    "question": "What is self-attention?",
+    "relevant_chunks": [
+      "doc_self-attention-transformers-2023_chunk_007",
+      "doc_self-attention-transformers-2023_chunk_008",
+      "doc_self-attention-transformers-2023_chunk_009"
+    ]
+  },
+  {
+    "id": "q002",
+    "question": "What is the purpose of the query, key, and value representations in self-attention?",
+    "relevant_chunks": [
+      "doc_self-attention-transformers-2023_chunk_009",
+      "doc_self-attention-transformers-2023_chunk_010"
+    ]
+  },
+  {
+    "id": "q003",
+    "question": "What is multi-head attention?",
+    "relevant_chunks": [
+      "doc_self-attention-transformers-2023_chunk_017",
+      "doc_self-attention-transformers-2023_chunk_018",
+      "doc_self-attention-transformers-2023_chunk_019"
+    ]
+  },
+  {
+    "id": "q004",
+    "question": "Why does the Transformer use multiple attention heads?",
+    "relevant_chunks": [
+      "doc_self-attention-transformers-2023_chunk_018",
+      "doc_self-attention-transformers-2023_chunk_019",
+      "doc_self-attention-transformers-2023_chunk_021"
+    ]
+  },
+  {
+    "id": "q005",
+    "question": "What is the difference between self-attention and cross-attention?",
+    "relevant_chunks": [
+      "doc_self-attention-transformers-2023_chunk_009",
+      "doc_self-attention-transformers-2023_chunk_027"
+    ]
+  },
+  {
+    "id": "q006",
+    "question": "Why are positional encodings needed?",
+    "relevant_chunks": [
+      "doc_self-attention-transformers-2023_chunk_011",
+      "doc_self-attention-transformers-2023_chunk_012",
+      "doc_self-attention-transformers-2023_chunk_013"
+    ]
+  },
+  {
+    "id": "q007",
+    "question": "What is the role of the Transformer encoder?",
+    "relevant_chunks": [
+      "doc_self-attention-transformers-2023_chunk_025"
+    ]
+  },
+  {
+    "id": "q008",
+    "question": "What is the role of the Transformer decoder?",
+    "relevant_chunks": [
+      "doc_self-attention-transformers-2023_chunk_025",
+      "doc_self-attention-transformers-2023_chunk_026"
+    ]
+  },
+  {
+    "id": "q009",
+    "question": "What is scaled dot-product attention?",
+    "relevant_chunks": [
+      "doc_self-attention-transformers-2023_chunk_024"
+    ]
+  },
+  {
+    "id": "q010",
+    "question": "What problem does self-attention solve compared with recurrent architectures?",
+    "relevant_chunks": [
+      "doc_self-attention-transformers-2023_chunk_005",
+      "doc_self-attention-transformers-2023_chunk_006",
+      "doc_self-attention-transformers-2023_chunk_007"
+    ]
+  }
+]

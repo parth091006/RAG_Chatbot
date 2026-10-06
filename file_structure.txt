@@ -1,0 +1,94 @@
+advanced-rag/
+├── README.md
+├── LICENSE
+├── pyproject.toml
+├── .env.example
+├── .gitignore
+├── Dockerfile
+├── compose.yaml
+├── file_structure.txt
+├── phase_commands.md
+├── data/
+│   ├── raw/
+│   │   ├── self-attention-transformers-2023.pdf
+│   │   └── .gitkeep
+│   ├── processed/
+│   │   └── .gitkeep
+│   └── evaluation/
+│       ├── retrieval_questions.json
+│       ├── retrieval_results.json
+│       ├── chunking_experiment_results.json
+│       ├── retrieval_questions_ground_truth.json
+│       ├── retrieval_results_bow_ground_truth.json
+│       ├── retrieval_results_tfidf.json
+│       ├── retrieval_results_tfidf_ground_truth.json
+│       ├── retrieval_results_tfidf_ground_truth_v2.json
+│       ├── hybrid_retrieval_results.json
+│       ├── reranker_results.json
+│       ├── generation_results.json
+│       ├── reranked_generation_results.json
+│       └── .gitkeep
+├── scripts/
+│   ├── compare_pdf_extractors.py
+│   ├── inspect_pdf_blocks.py
+│   ├── inspect_chunks.py
+│   ├── evaluate_retrieval.py
+│   ├── run_chunking_experiment.py
+│   ├── evaluate_hybrid_retrieval.py
+│   ├── evaluate_reranker.py
+│   ├── evaluate_generation.py
+│   └── evaluate_reranked_generation.py
+├── src/
+│   └── rag/
+│       ├── __init__.py
+│       ├── pipeline.py
+│       ├── config/
+│       │   └── settings.py
+│       ├── ingestion/
+│       │   ├── loader.py
+│       │   ├── parser.py
+│       │   └── metadata.py
+│       ├── chunking/
+│       │   ├── chunker.py
+│       │   └── strategies.py
+│       ├── embeddings/
+│       │   └── embedder.py
+│       ├── retrieval/
+│       │   ├── dense.py
+│       │   ├── sparse.py
+│       │   ├── hybrid.py
+│       │   └── reranker.py
+│       ├── generation/
+│       │   ├── prompts.py
+│       │   └── generator.py
+│       ├── citations/
+│       │   └── citation_manager.py
+│       ├── comparison/
+│       │   └── comparator.py
+│       ├── evaluation/
+│       │   ├── datasets.py
+│       │   ├── retrieval_metrics.py
+│       │   └── generation_metrics.py
+│       ├── tracing/
+│       │   └── tracer.py
+│       └── api/
+│           ├── main.py
+│           └── routes/
+│               └── .gitkeep
+├── tests/
+│   ├── test_ingestion.py
+│   ├── test_parser_cli.py
+│   ├── test_chunking.py
+│   ├── test_embeddings.py
+│   ├── test_retrieval.py
+│   ├── test_retrieval_metrics.py
+│   ├── test_phase1_pipeline.py
+│   ├── test_generator.py
+│   ├── test_citations.py
+│   └── test_api.py
+├── notebooks/
+│   ├── chunking_experiments.ipynb
+│   ├── retrieval_experiments.ipynb
+│   └── evaluation.ipynb
+└── dashboard/
+    └── .gitkeep
