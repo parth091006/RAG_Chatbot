@@ -6,8 +6,19 @@ from typing import Any
 from .chunking.chunker import Chunk, chunk_pages, section_aware_chunks
 from .embeddings.embedder import Embedder
 from .generation.generator import Generator
-from .ingestion.parser import extract_text_from_pdf
+from .ingestion.parser import (
+    extract_pages_from_pdf,
+    extract_pages_with_regions,
+    extract_text_from_pdf,
+)
 from .retrieval.dense import DenseRetriever
+
+
+EXTRACTION_CHOICES = {
+    "legacy-pypdf",
+    "current",
+    "primary-only",
+}
 
 
 class PhaseOneRAG:
@@ -33,9 +44,29 @@ class PhaseOneRAG:
         pdf_path: str | Path,
         embedding_method: str = "bow",
         semantic_model_name: str | None = None,
+        extraction: str = "legacy-pypdf",
+        header_fix: bool = False,
     ) -> None:
+        if extraction not in EXTRACTION_CHOICES:
+            raise ValueError(
+                f"Unsupported extraction: {extraction!r}. "
+                f"Choose one of: {sorted(EXTRACTION_CHOICES)}"
+            )
+
+        if header_fix and extraction == "legacy-pypdf":
+            raise ValueError(
+                "header_fix requires extraction to be current or "
+                "primary-only, not legacy-pypdf."
+            )
+
         self.pdf_path = Path(pdf_path)
         self.embedding_method = embedding_method
+        self.extraction = extraction
+        self.header_fix = header_fix
+
+        self.chunk_count = 0
+        self.total_page_characters = 0
+        self.total_chunk_characters = 0
 
         self.embedder = Embedder(
             model_name=embedding_method,
@@ -98,6 +129,17 @@ class PhaseOneRAG:
         self._chunks = chunks
         self._embeddings = []
         self._retriever = None
+        self.chunk_count = len(chunks)
+        self.total_page_characters = len(
+            "\n".join(
+                self._page_text(page)
+                for page in pages
+            )
+        )
+        self.total_chunk_characters = sum(
+            len(str(chunk["text"]))
+            for chunk in chunks
+        )
 
         return chunks
 
@@ -203,8 +245,22 @@ class PhaseOneRAG:
         if self._retriever is None:
             self._retriever = DenseRetriever(self._embeddings)
 
-    def _load_pdf_pages(self) -> list[str]:
+    def _load_pdf_pages(self) -> list[str | dict[str, object]]:
         """Load PDF text while preserving page boundaries."""
+        if self.extraction == "current":
+            return extract_pages_with_regions(
+                self.pdf_path,
+                include_secondary=True,
+                strip_page_number_headers=self.header_fix,
+            )
+
+        if self.extraction == "primary-only":
+            return extract_pages_with_regions(
+                self.pdf_path,
+                include_secondary=False,
+                strip_page_number_headers=self.header_fix,
+            )
+
         from pypdf import PdfReader
 
         reader = PdfReader(str(self.pdf_path))
@@ -213,6 +269,12 @@ class PhaseOneRAG:
             page.extract_text() or ""
             for page in reader.pages
         ]
+
+    @staticmethod
+    def _page_text(page: str | dict[str, object]) -> str:
+        if isinstance(page, str):
+            return page
+        return str(page["text"])
 
     def _document_id(self) -> str:
         """Create the document ID used by the chunking layer."""

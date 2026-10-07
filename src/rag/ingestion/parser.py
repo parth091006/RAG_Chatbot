@@ -4,7 +4,26 @@ import argparse
 import re
 import sys
 from pathlib import Path
-from typing import Any
+from typing import Any, TypedDict
+
+
+class RegionSpan(TypedDict):
+    start: int
+    end: int
+    region: str
+    header_like: bool
+
+
+class RemovedBlock(TypedDict):
+    text: str
+    bbox: tuple[float, float, float, float]
+    reason: str
+
+
+class PageWithRegions(TypedDict):
+    text: str
+    region_spans: list[RegionSpan]
+    removed_blocks: list[RemovedBlock]
 
 
 def extract_text_from_pdf(file_path: str | Path) -> str:
@@ -12,7 +31,11 @@ def extract_text_from_pdf(file_path: str | Path) -> str:
     return "\n\n".join(extract_pages_from_pdf(file_path))
 
 
-def extract_pages_from_pdf(file_path: str | Path) -> list[str]:
+def extract_pages_from_pdf(
+    file_path: str | Path,
+    include_secondary: bool = True,
+    strip_page_number_headers: bool = False,
+) -> list[str]:
     """
     Extract page text using PyMuPDF block structure.
 
@@ -40,18 +63,75 @@ def extract_pages_from_pdf(file_path: str | Path) -> list[str]:
 
     try:
         return [
-            _extract_page_text(page)
+            _extract_page_text(
+                page,
+                include_secondary=include_secondary,
+                strip_page_number_headers=strip_page_number_headers,
+            )
             for page in document
         ]
     finally:
         document.close()
 
 
-def _extract_page_text(page: Any) -> str:
+def extract_pages_with_regions(
+    file_path: str | Path,
+    include_secondary: bool = True,
+    strip_page_number_headers: bool = False,
+) -> list[PageWithRegions]:
+    """Extract page text with final block regions and removed-block metadata."""
+    pdf_path = Path(file_path)
+
+    if not pdf_path.exists():
+        raise FileNotFoundError(
+            f"PDF not found: {pdf_path}"
+        )
+
+    try:
+        import pymupdf
+    except ImportError:  # pragma: no cover
+        raise ImportError(
+            "pymupdf is required to parse PDF documents."
+        )
+
+    document = pymupdf.open(pdf_path)
+
+    try:
+        return [
+            _extract_page_with_regions(
+                page,
+                include_secondary=include_secondary,
+                strip_page_number_headers=strip_page_number_headers,
+            )
+            for page in document
+        ]
+    finally:
+        document.close()
+
+
+def _extract_page_text(
+    page: Any,
+    include_secondary: bool = True,
+    strip_page_number_headers: bool = False,
+) -> str:
     """Extract and order meaningful blocks from one PDF page."""
+    return _extract_page_with_regions(
+        page,
+        include_secondary=include_secondary,
+        strip_page_number_headers=strip_page_number_headers,
+    )["text"]
+
+
+def _extract_page_with_regions(
+    page: Any,
+    include_secondary: bool = True,
+    strip_page_number_headers: bool = False,
+) -> PageWithRegions:
+    """Extract ordered blocks and retain their output provenance."""
     raw_blocks = page.get_text("blocks")
 
     blocks: list[dict[str, Any]] = []
+    removed_blocks: list[RemovedBlock] = []
 
     for index, block in enumerate(raw_blocks):
         if len(block) < 5:
@@ -72,7 +152,20 @@ def _extract_page_text(page: Any) -> str:
             page_height=page.rect.height,
             y0=y0,
             y1=y1,
+            strip_page_number_headers=strip_page_number_headers,
         ):
+            removed_blocks.append(
+                {
+                    "text": cleaned_text,
+                    "bbox": (
+                        float(x0),
+                        float(y0),
+                        float(x1),
+                        float(y1),
+                    ),
+                    "reason": "repeated_header_or_footer",
+                }
+            )
             continue
 
         blocks.append(
@@ -87,7 +180,11 @@ def _extract_page_text(page: Any) -> str:
         )
 
     if not blocks:
-        return ""
+        return {
+            "text": "",
+            "region_spans": [],
+            "removed_blocks": removed_blocks,
+        }
 
     primary_blocks, secondary_blocks = _split_page_layout(
         blocks,
@@ -108,12 +205,43 @@ def _extract_page_text(page: Any) -> str:
         )
     )
 
-    ordered_blocks = primary_blocks + secondary_blocks
+    ordered_blocks = [
+        (block, "primary")
+        for block in primary_blocks
+    ]
 
-    return "\n\n".join(
-        block["text"]
-        for block in ordered_blocks
-    )
+    if include_secondary:
+        ordered_blocks += [
+            (block, "secondary")
+            for block in secondary_blocks
+        ]
+
+    page_text_parts: list[str] = []
+    region_spans: list[RegionSpan] = []
+    offset = 0
+
+    for index, (block, region) in enumerate(ordered_blocks):
+        if index:
+            page_text_parts.append("\n\n")
+            offset += 2
+
+        block_text = block["text"]
+        page_text_parts.append(block_text)
+        region_spans.append(
+            {
+                "start": offset,
+                "end": offset + len(block_text),
+                "region": region,
+                "header_like": _is_header_like_block(block_text),
+            }
+        )
+        offset += len(block_text)
+
+    return {
+        "text": "".join(page_text_parts),
+        "region_spans": region_spans,
+        "removed_blocks": removed_blocks,
+    }
 
 
 def _split_page_layout(
@@ -220,6 +348,7 @@ def _is_repeated_header_or_footer(
     page_height: float,
     y0: float,
     y1: float,
+    strip_page_number_headers: bool = False,
 ) -> bool:
     """Remove obvious repeated page-level header/footer content."""
     normalized = " ".join(
@@ -236,7 +365,17 @@ def _is_repeated_header_or_footer(
 
     if (
         y0 < page_height * 0.10
-        and normalized == "with deep learning"
+        and (
+            normalized == "with deep learning"
+            or (
+                strip_page_number_headers
+                and re.fullmatch(
+                    r"with deep learning \d{1,3}",
+                    normalized,
+                )
+                is not None
+            )
+        )
     ):
         return True
 
@@ -251,6 +390,14 @@ def _is_repeated_header_or_footer(
         return True
 
     return False
+
+
+def _is_header_like_block(text: str) -> bool:
+    normalized = " ".join(text.casefold().split())
+    return re.fullmatch(
+        r"with deep learning(?: \d{1,3})?",
+        normalized,
+    ) is not None
 
 
 def main() -> None:

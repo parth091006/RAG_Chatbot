@@ -1,10 +1,22 @@
 from __future__ import annotations
 
 import argparse
+import sys
 from pathlib import Path
 
-from src.rag.ingestion.parser import extract_pages_from_pdf
-from src.rag.chunking.chunker import chunk_pages
+
+PROJECT_ROOT = Path(__file__).resolve().parents[1]
+
+if str(PROJECT_ROOT) not in sys.path:
+    sys.path.insert(0, str(PROJECT_ROOT))
+
+
+from src.rag.evaluation.run_metadata import (
+    build_run_metadata,
+    resolve_extraction,
+    safe_write_json,
+)
+from src.rag.pipeline import PhaseOneRAG
 
 
 def main() -> None:
@@ -45,6 +57,29 @@ def main() -> None:
         help="Last chunk number to display.",
     )
 
+    parser.add_argument(
+        "--extraction",
+        choices=["legacy-pypdf", "current", "primary-only"],
+        default=None,
+    )
+
+    parser.add_argument(
+        "--header-fix",
+        action="store_true",
+    )
+
+    parser.add_argument(
+        "--force",
+        action="store_true",
+    )
+
+    parser.add_argument(
+        "--output",
+        type=Path,
+        default=None,
+        help="Optional JSON output path for inspected chunks.",
+    )
+
     args = parser.parse_args()
 
     pdf_path = Path(args.pdf_path)
@@ -54,17 +89,59 @@ def main() -> None:
             f"PDF not found: {pdf_path}"
         )
 
-    pages = extract_pages_from_pdf(pdf_path)
+    try:
+        extraction, metadata_enabled = resolve_extraction(
+            args.extraction,
+            args.header_fix,
+            "current",
+        )
+    except ValueError as exc:
+        parser.error(str(exc))
 
-    document_id = f"doc_{pdf_path.stem}"
-
-    chunks = chunk_pages(
-        pages,
-        document_id=document_id,
-        document_name=pdf_path.name,
+    rag = PhaseOneRAG(
+        pdf_path,
+        extraction=extraction,
+        header_fix=args.header_fix,
+    )
+    chunks = rag.pdf_to_chunks(
         chunk_size=args.chunk_size,
         overlap=args.overlap,
     )
+
+    if args.output is not None:
+        serialized_chunks = []
+        for chunk in chunks:
+            serialized = {
+                "chunk_id": chunk["chunk_id"],
+                "page_number": chunk["page_number"],
+                "chunk_text_hash": chunk["chunk_text_hash"],
+                "char_count": len(str(chunk["text"])),
+                "text": chunk["text"],
+            }
+            if metadata_enabled:
+                serialized["secondary_char_ratio"] = chunk.get(
+                    "secondary_char_ratio"
+                )
+            serialized_chunks.append(serialized)
+
+        metadata = None
+        if metadata_enabled:
+            metadata = build_run_metadata(
+                extraction=extraction,
+                header_fix=args.header_fix,
+                embedding_method="none",
+                chunk_size=args.chunk_size,
+                overlap=args.overlap,
+                pipeline=rag,
+                pdf_path=pdf_path,
+            )
+
+        safe_write_json(
+            args.output,
+            serialized_chunks,
+            metadata=metadata,
+            force=args.force,
+        )
 
     print("=" * 100)
     print("CHUNK INSPECTION")

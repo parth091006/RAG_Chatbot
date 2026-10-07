@@ -1,4 +1,4 @@
-advanced-rag/
+RAG_Chatbot/
 ├── README.md
 ├── LICENSE
 ├── pyproject.toml

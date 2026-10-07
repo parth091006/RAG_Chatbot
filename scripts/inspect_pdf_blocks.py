@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 import sys
 
 try:
@@ -8,9 +10,6 @@ try:
 except (AttributeError, ValueError):
     pass
 
-from __future__ import annotations
-
-import sys
 from pathlib import Path
 
 import pymupdf

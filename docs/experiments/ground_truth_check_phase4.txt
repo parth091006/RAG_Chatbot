@@ -1,0 +1,340 @@
+GROUND-TRUTH SAFETY REPORT
+==========================
+
+PDF: C:\Users\PARTH\Parth_Projects\RAG_Chatbot\data\raw\self-attention-transformers-2023.pdf
+Questions: C:\Users\PARTH\Parth_Projects\RAG_Chatbot\data\evaluation\retrieval_questions.json
+
+A. PER-PAGE CHUNK MAP
+----------------------
+legacy-pypdf
+  page 1: doc_self-attention-transformers-2023_chunk_001 -> doc_self-attention-transformers-2023_chunk_002 (2)
+  page 2: doc_self-attention-transformers-2023_chunk_003 -> doc_self-attention-transformers-2023_chunk_004 (2)
+  page 3: doc_self-attention-transformers-2023_chunk_005 -> doc_self-attention-transformers-2023_chunk_006 (2)
+  page 4: doc_self-attention-transformers-2023_chunk_007 -> doc_self-attention-transformers-2023_chunk_008 (2)
+  page 5: doc_self-attention-transformers-2023_chunk_009 -> doc_self-attention-transformers-2023_chunk_010 (2)
+  page 6: doc_self-attention-transformers-2023_chunk_011 -> doc_self-attention-transformers-2023_chunk_012 (2)
+  page 7: doc_self-attention-transformers-2023_chunk_013 -> doc_self-attention-transformers-2023_chunk_014 (2)
+  page 8: doc_self-attention-transformers-2023_chunk_015 -> doc_self-attention-transformers-2023_chunk_016 (2)
+  page 9: doc_self-attention-transformers-2023_chunk_017 -> doc_self-attention-transformers-2023_chunk_018 (2)
+  page 10: doc_self-attention-transformers-2023_chunk_019 -> doc_self-attention-transformers-2023_chunk_020 (2)
+  page 11: doc_self-attention-transformers-2023_chunk_021 -> doc_self-attention-transformers-2023_chunk_022 (2)
+  page 12: doc_self-attention-transformers-2023_chunk_023 -> doc_self-attention-transformers-2023_chunk_024 (2)
+  page 13: doc_self-attention-transformers-2023_chunk_025 -> doc_self-attention-transformers-2023_chunk_026 (2)
+  page 14: doc_self-attention-transformers-2023_chunk_027 -> doc_self-attention-transformers-2023_chunk_028 (2)
+  page 15: doc_self-attention-transformers-2023_chunk_029 -> doc_self-attention-transformers-2023_chunk_029 (1)
+  page 16: doc_self-attention-transformers-2023_chunk_030 -> doc_self-attention-transformers-2023_chunk_032 (3)
+  page 17: doc_self-attention-transformers-2023_chunk_033 -> doc_self-attention-transformers-2023_chunk_037 (5)
+  page 18: doc_self-attention-transformers-2023_chunk_038 -> doc_self-attention-transformers-2023_chunk_038 (1)
+A-current
+  page 1: doc_self-attention-transformers-2023_chunk_001 -> doc_self-attention-transformers-2023_chunk_002 (2)
+  page 2: doc_self-attention-transformers-2023_chunk_003 -> doc_self-attention-transformers-2023_chunk_004 (2)
+  page 3: doc_self-attention-transformers-2023_chunk_005 -> doc_self-attention-transformers-2023_chunk_006 (2)
+  page 4: doc_self-attention-transformers-2023_chunk_007 -> doc_self-attention-transformers-2023_chunk_008 (2)
+  page 5: doc_self-attention-transformers-2023_chunk_009 -> doc_self-attention-transformers-2023_chunk_010 (2)
+  page 6: doc_self-attention-transformers-2023_chunk_011 -> doc_self-attention-transformers-2023_chunk_012 (2)
+  page 7: doc_self-attention-transformers-2023_chunk_013 -> doc_self-attention-transformers-2023_chunk_014 (2)
+  page 8: doc_self-attention-transformers-2023_chunk_015 -> doc_self-attention-transformers-2023_chunk_016 (2)
+  page 9: doc_self-attention-transformers-2023_chunk_017 -> doc_self-attention-transformers-2023_chunk_018 (2)
+  page 10: doc_self-attention-transformers-2023_chunk_019 -> doc_self-attention-transformers-2023_chunk_020 (2)
+  page 11: doc_self-attention-transformers-2023_chunk_021 -> doc_self-attention-transformers-2023_chunk_022 (2)
+  page 12: doc_self-attention-transformers-2023_chunk_023 -> doc_self-attention-transformers-2023_chunk_024 (2)
+  page 13: doc_self-attention-transformers-2023_chunk_025 -> doc_self-attention-transformers-2023_chunk_026 (2)
+  page 14: doc_self-attention-transformers-2023_chunk_027 -> doc_self-attention-transformers-2023_chunk_028 (2)
+  page 15: doc_self-attention-transformers-2023_chunk_029 -> doc_self-attention-transformers-2023_chunk_029 (1)
+  page 16: doc_self-attention-transformers-2023_chunk_030 -> doc_self-attention-transformers-2023_chunk_032 (3)
+  page 17: doc_self-attention-transformers-2023_chunk_033 -> doc_self-attention-transformers-2023_chunk_037 (5)
+  page 18: doc_self-attention-transformers-2023_chunk_038 -> doc_self-attention-transformers-2023_chunk_038 (1)
+B-current+fix
+  page 1: doc_self-attention-transformers-2023_chunk_001 -> doc_self-attention-transformers-2023_chunk_002 (2)
+  page 2: doc_self-attention-transformers-2023_chunk_003 -> doc_self-attention-transformers-2023_chunk_004 (2)
+  page 3: doc_self-attention-transformers-2023_chunk_005 -> doc_self-attention-transformers-2023_chunk_006 (2)
+  page 4: doc_self-attention-transformers-2023_chunk_007 -> doc_self-attention-transformers-2023_chunk_008 (2)
+  page 5: doc_self-attention-transformers-2023_chunk_009 -> doc_self-attention-transformers-2023_chunk_010 (2)
+  page 6: doc_self-attention-transformers-2023_chunk_011 -> doc_self-attention-transformers-2023_chunk_012 (2)
+  page 7: doc_self-attention-transformers-2023_chunk_013 -> doc_self-attention-transformers-2023_chunk_014 (2)
+  page 8: doc_self-attention-transformers-2023_chunk_015 -> doc_self-attention-transformers-2023_chunk_016 (2)
+  page 9: doc_self-attention-transformers-2023_chunk_017 -> doc_self-attention-transformers-2023_chunk_018 (2)
+  page 10: doc_self-attention-transformers-2023_chunk_019 -> doc_self-attention-transformers-2023_chunk_020 (2)
+  page 11: doc_self-attention-transformers-2023_chunk_021 -> doc_self-attention-transformers-2023_chunk_022 (2)
+  page 12: doc_self-attention-transformers-2023_chunk_023 -> doc_self-attention-transformers-2023_chunk_024 (2)
+  page 13: doc_self-attention-transformers-2023_chunk_025 -> doc_self-attention-transformers-2023_chunk_026 (2)
+  page 14: doc_self-attention-transformers-2023_chunk_027 -> doc_self-attention-transformers-2023_chunk_028 (2)
+  page 15: doc_self-attention-transformers-2023_chunk_029 -> doc_self-attention-transformers-2023_chunk_029 (1)
+  page 16: doc_self-attention-transformers-2023_chunk_030 -> doc_self-attention-transformers-2023_chunk_032 (3)
+  page 17: doc_self-attention-transformers-2023_chunk_033 -> doc_self-attention-transformers-2023_chunk_037 (5)
+  page 18: doc_self-attention-transformers-2023_chunk_038 -> doc_self-attention-transformers-2023_chunk_038 (1)
+C-primary-only
+  page 1: doc_self-attention-transformers-2023_chunk_001 -> doc_self-attention-transformers-2023_chunk_002 (2)
+  page 2: doc_self-attention-transformers-2023_chunk_003 -> doc_self-attention-transformers-2023_chunk_004 (2)
+  page 3: doc_self-attention-transformers-2023_chunk_005 -> doc_self-attention-transformers-2023_chunk_006 (2)
+  page 4: doc_self-attention-transformers-2023_chunk_007 -> doc_self-attention-transformers-2023_chunk_008 (2)
+  page 5: doc_self-attention-transformers-2023_chunk_009 -> doc_self-attention-transformers-2023_chunk_010 (2)
+  page 6: doc_self-attention-transformers-2023_chunk_011 -> doc_self-attention-transformers-2023_chunk_012 (2)
+  page 7: doc_self-attention-transformers-2023_chunk_013 -> doc_self-attention-transformers-2023_chunk_014 (2)
+  page 8: doc_self-attention-transformers-2023_chunk_015 -> doc_self-attention-transformers-2023_chunk_016 (2)
+  page 9: doc_self-attention-transformers-2023_chunk_017 -> doc_self-attention-transformers-2023_chunk_018 (2)
+  page 10: doc_self-attention-transformers-2023_chunk_019 -> doc_self-attention-transformers-2023_chunk_020 (2)
+  page 11: doc_self-attention-transformers-2023_chunk_021 -> doc_self-attention-transformers-2023_chunk_022 (2)
+  page 12: doc_self-attention-transformers-2023_chunk_023 -> doc_self-attention-transformers-2023_chunk_024 (2)
+  page 13: doc_self-attention-transformers-2023_chunk_025 -> doc_self-attention-transformers-2023_chunk_026 (2)
+  page 14: doc_self-attention-transformers-2023_chunk_027 -> doc_self-attention-transformers-2023_chunk_028 (2)
+  page 15: doc_self-attention-transformers-2023_chunk_029 -> doc_self-attention-transformers-2023_chunk_029 (1)
+  page 16: doc_self-attention-transformers-2023_chunk_030 -> doc_self-attention-transformers-2023_chunk_032 (3)
+  page 17: doc_self-attention-transformers-2023_chunk_033 -> doc_self-attention-transformers-2023_chunk_037 (5)
+  page 18: doc_self-attention-transformers-2023_chunk_038 -> doc_self-attention-transformers-2023_chunk_038 (1)
+D-primary-only+fix
+  page 1: doc_self-attention-transformers-2023_chunk_001 -> doc_self-attention-transformers-2023_chunk_002 (2)
+  page 2: doc_self-attention-transformers-2023_chunk_003 -> doc_self-attention-transformers-2023_chunk_004 (2)
+  page 3: doc_self-attention-transformers-2023_chunk_005 -> doc_self-attention-transformers-2023_chunk_006 (2)
+  page 4: doc_self-attention-transformers-2023_chunk_007 -> doc_self-attention-transformers-2023_chunk_008 (2)
+  page 5: doc_self-attention-transformers-2023_chunk_009 -> doc_self-attention-transformers-2023_chunk_010 (2)
+  page 6: doc_self-attention-transformers-2023_chunk_011 -> doc_self-attention-transformers-2023_chunk_012 (2)
+  page 7: doc_self-attention-transformers-2023_chunk_013 -> doc_self-attention-transformers-2023_chunk_014 (2)
+  page 8: doc_self-attention-transformers-2023_chunk_015 -> doc_self-attention-transformers-2023_chunk_016 (2)
+  page 9: doc_self-attention-transformers-2023_chunk_017 -> doc_self-attention-transformers-2023_chunk_018 (2)
+  page 10: doc_self-attention-transformers-2023_chunk_019 -> doc_self-attention-transformers-2023_chunk_020 (2)
+  page 11: doc_self-attention-transformers-2023_chunk_021 -> doc_self-attention-transformers-2023_chunk_022 (2)
+  page 12: doc_self-attention-transformers-2023_chunk_023 -> doc_self-attention-transformers-2023_chunk_024 (2)
+  page 13: doc_self-attention-transformers-2023_chunk_025 -> doc_self-attention-transformers-2023_chunk_026 (2)
+  page 14: doc_self-attention-transformers-2023_chunk_027 -> doc_self-attention-transformers-2023_chunk_028 (2)
+  page 15: doc_self-attention-transformers-2023_chunk_029 -> doc_self-attention-transformers-2023_chunk_029 (1)
+  page 16: doc_self-attention-transformers-2023_chunk_030 -> doc_self-attention-transformers-2023_chunk_032 (3)
+  page 17: doc_self-attention-transformers-2023_chunk_033 -> doc_self-attention-transformers-2023_chunk_037 (5)
+  page 18: doc_self-attention-transformers-2023_chunk_038 -> doc_self-attention-transformers-2023_chunk_038 (1)
+
+Global chunk IDs map to the same pages in every arm: True
+First page with any chunk-count divergence: None
+
+B. AUTHORING-BASIS EVIDENCE
+---------------------------
+{"path": "C:\\Users\\PARTH\\Parth_Projects\\RAG_Chatbot\\data\\evaluation\\retrieval_questions.json", "mtime": "2026-10-06T16:35:08.901432+00:00", "git_last_change": {"commit": "41b6c3b3f3410bdc9176e0380c8704a74ebc4fb3", "timestamp": "2026-10-06T22:10:12+05:30"}}
+{"path": "C:\\Users\\PARTH\\Parth_Projects\\RAG_Chatbot\\data\\evaluation\\retrieval_questions_ground_truth.json", "mtime": "2026-10-06T16:27:40.478702+00:00", "git_last_change": {"commit": "41b6c3b3f3410bdc9176e0380c8704a74ebc4fb3", "timestamp": "2026-10-06T22:10:12+05:30"}}
+{"path": "C:\\Users\\PARTH\\Parth_Projects\\RAG_Chatbot\\src\\rag\\ingestion\\parser.py", "mtime": "2026-10-07T11:08:39.544680+00:00", "git_last_change": {"commit": "41b6c3b3f3410bdc9176e0380c8704a74ebc4fb3", "timestamp": "2026-10-06T22:10:12+05:30"}}
+{"path": "C:\\Users\\PARTH\\Parth_Projects\\RAG_Chatbot\\src\\rag\\pipeline.py", "mtime": "2026-10-07T11:08:39.544680+00:00", "git_last_change": {"commit": "41b6c3b3f3410bdc9176e0380c8704a74ebc4fb3", "timestamp": "2026-10-06T22:10:12+05:30"}}
+{"path": "C:\\Users\\PARTH\\Parth_Projects\\RAG_Chatbot\\scripts\\inspect_chunks.py", "mtime": "2026-10-07T11:11:13.891583+00:00", "git_last_change": {"commit": "41b6c3b3f3410bdc9176e0380c8704a74ebc4fb3", "timestamp": "2026-10-06T22:10:12+05:30"}}
+
+C. DISPUTED QUESTIONS
+----------------------
+q001: What is self-attention?
+  set A: ['doc_self-attention-transformers-2023_chunk_008', 'doc_self-attention-transformers-2023_chunk_009', 'doc_self-attention-transformers-2023_chunk_010']
+  set B: ['doc_self-attention-transformers-2023_chunk_007', 'doc_self-attention-transformers-2023_chunk_008', 'doc_self-attention-transformers-2023_chunk_009']
+  relation: uniform -1 shift
+  arm legacy-pypdf:
+    doc_self-attention-transformers-2023_chunk_007 cited_by=B overlap=0.000 text='[draft ] note 10 : self -attention & transformers cs 224n : natural language processing with deep learning 4 the number of intermediate computations—matrix multiplies and nonlinearities, for example—t'
+    doc_self-attention-transformers-2023_chunk_008 cited_by=A,B overlap=0.500 text='we learned how to look back into the source sequence once per token of the translation. In this note, we’ll present an entire replacement for recurrent neural networks just based on attention. This wi'
+    doc_self-attention-transformers-2023_chunk_009 cited_by=A,B overlap=0.500 text='[draft ] note 10 : self -attention & transformers cs 224n : natural language processing with deep learning 5 Consider a token xi in the sequence x1:n. From it, we define a query qi = Qxi, for matrix Q'
+    doc_self-attention-transformers-2023_chunk_010 cited_by=A overlap=1.000 text='information (in an informal sense,) from what other tokens, should be used in representing xi in context. The use of matrices K, Q, V intuitively allow us to use different views of the xi for the diff'
+  arm A-current:
+    doc_self-attention-transformers-2023_chunk_007 cited_by=B overlap=0.500 text='the number of intermediate computations—matrix multiplies and nonlinearities, for example—that separate chef from is scales with the number of words between them. We visualize this in Figure 2. 1 2 3 '
+    doc_self-attention-transformers-2023_chunk_008 cited_by=A,B overlap=0.500 text='the value(s) of the key(s) most like the query. By “picking” and “most like,” we mean averaging overall values, putting more weight on those which correspond to the keys more like the query. In self- '
+    doc_self-attention-transformers-2023_chunk_009 cited_by=A,B overlap=1.000 text='Consider a token xi in the sequence x1:n. From it, we define a query qi = Qxi, for matrix Q ∈Rd×d. Then, for each token in the sequence xj ∈{x1 . . . , xn}, we define both a key and a value similarly,'
+    doc_self-attention-transformers-2023_chunk_010 cited_by=A overlap=0.500 text='K, Q, V intuitively allow us to use different views of the xi for the different roles of key, query, and value. We perform this operation to build hi for all i ∈{1, . . . , n}. ∑ hi = αij vj (weighted'
+  arm B-current+fix:
+    doc_self-attention-transformers-2023_chunk_007 cited_by=B overlap=0.500 text='the number of intermediate computations—matrix multiplies and nonlinearities, for example—that separate chef from is scales with the number of words between them. We visualize this in Figure 2. 1 2 3 '
+    doc_self-attention-transformers-2023_chunk_008 cited_by=A,B overlap=0.500 text='the value(s) of the key(s) most like the query. By “picking” and “most like,” we mean averaging overall values, putting more weight on those which correspond to the keys more like the query. In self- '
+    doc_self-attention-transformers-2023_chunk_009 cited_by=A,B overlap=1.000 text='Consider a token xi in the sequence x1:n. From it, we define a query qi = Qxi, for matrix Q ∈Rd×d. Then, for each token in the sequence xj ∈{x1 . . . , xn}, we define both a key and a value similarly,'
+    doc_self-attention-transformers-2023_chunk_010 cited_by=A overlap=0.500 text='K, Q, V intuitively allow us to use different views of the xi for the different roles of key, query, and value. We perform this operation to build hi for all i ∈{1, . . . , n}. ∑ hi = αij vj (weighted'
+  arm C-primary-only:
+    doc_self-attention-transformers-2023_chunk_007 cited_by=B overlap=0.500 text='the number of intermediate computations—matrix multiplies and nonlinearities, for example—that separate chef from is scales with the number of words between them. We visualize this in Figure 2. 1 2 3 '
+    doc_self-attention-transformers-2023_chunk_008 cited_by=A,B overlap=0.500 text='the value(s) of the key(s) most like the query. By “picking” and “most like,” we mean averaging overall values, putting more weight on those which correspond to the keys more like the query. In self- '
+    doc_self-attention-transformers-2023_chunk_009 cited_by=A,B overlap=1.000 text='Consider a token xi in the sequence x1:n. From it, we define a query qi = Qxi, for matrix Q ∈Rd×d. Then, for each token in the sequence xj ∈{x1 . . . , xn}, we define both a key and a value similarly,'
+    doc_self-attention-transformers-2023_chunk_010 cited_by=A overlap=0.500 text='K, Q, V intuitively allow us to use different views of the xi for the different roles of key, query, and value. We perform this operation to build hi for all i ∈{1, . . . , n}. ∑ hi = αij vj (weighted'
+  arm D-primary-only+fix:
+    doc_self-attention-transformers-2023_chunk_007 cited_by=B overlap=0.500 text='the number of intermediate computations—matrix multiplies and nonlinearities, for example—that separate chef from is scales with the number of words between them. We visualize this in Figure 2. 1 2 3 '
+    doc_self-attention-transformers-2023_chunk_008 cited_by=A,B overlap=0.500 text='the value(s) of the key(s) most like the query. By “picking” and “most like,” we mean averaging overall values, putting more weight on those which correspond to the keys more like the query. In self- '
+    doc_self-attention-transformers-2023_chunk_009 cited_by=A,B overlap=1.000 text='Consider a token xi in the sequence x1:n. From it, we define a query qi = Qxi, for matrix Q ∈Rd×d. Then, for each token in the sequence xj ∈{x1 . . . , xn}, we define both a key and a value similarly,'
+    doc_self-attention-transformers-2023_chunk_010 cited_by=A overlap=0.500 text='K, Q, V intuitively allow us to use different views of the xi for the different roles of key, query, and value. We perform this operation to build hi for all i ∈{1, . . . , n}. ∑ hi = αij vj (weighted'
+q004: Why does the Transformer use multiple attention heads?
+  set A: ['doc_self-attention-transformers-2023_chunk_017', 'doc_self-attention-transformers-2023_chunk_018', 'doc_self-attention-transformers-2023_chunk_019']
+  set B: ['doc_self-attention-transformers-2023_chunk_018', 'doc_self-attention-transformers-2023_chunk_019', 'doc_self-attention-transformers-2023_chunk_021']
+  relation: partial overlap
+  noisy-answer question: yes
+  arm legacy-pypdf:
+    doc_self-attention-transformers-2023_chunk_017 cited_by=A overlap=0.375 text='[draft ] note 10 : self -attention & transformers cs 224n : natural language processing with deep learning 9 Zuko made his uncle tea Zuko made his uncle tea −∞ −∞ −∞ −∞ −∞ −∞ −∞ −∞ −∞ −∞ Figure 3: Dia'
+    doc_self-attention-transformers-2023_chunk_018 cited_by=A,B overlap=0.875 text='scaling—and of course, we’ll discuss how these components are combined to form the Transformer. Embeddings Add Position Embeddings Masked Multi- Head Attention Add & Norm Feed-Forward Add & Norm Block'
+    doc_self-attention-transformers-2023_chunk_019 cited_by=A,B overlap=0.375 text='[draft ] note 10 : self -attention & transformers cs 224n : natural language processing with deep learning 10 We then perform self-attention with each head: h(ℓ) i = n ∑ j=1 α(ℓ) ij v(ℓ) j (22) α(ℓ) i'
+    doc_self-attention-transformers-2023_chunk_020 cited_by=- overlap=0.250 text='our keys and queries x1:nK and x1:nQ, all matrices in Rn×d. To compute self-attention, we can compute our weights in matrix operations: α = softmax(x1:nQK⊤x⊤ 1:n)∈ Rn×n (25) and then compute the self-'
+    doc_self-attention-transformers-2023_chunk_021 cited_by=B overlap=0.375 text='[draft ] note 10 : self -attention & transformers cs 224n : natural language processing with deep learning 11 then transpose the matrices to Rk,n,d/k, which intuitively should look like k sequences of'
+  arm A-current:
+    doc_self-attention-transformers-2023_chunk_017 cited_by=A overlap=0.625 text='Zuko made his uncle tea −∞ −∞ −∞ −∞ Zuko −∞ −∞ −∞ made −∞ −∞ his −∞ uncle tea Intuitively, these are the biggest components to understand. How- ever, as of 2023, by far the most-used architecture in N'
+    doc_self-attention-transformers-2023_chunk_018 cited_by=A,B overlap=0.750 text='the key-query dot products in order to carefully average two or more things. In Assignment 5, you’ll work through a bit of this intuition more carefully. What we’ll present now, multi-head self-attent'
+    doc_self-attention-transformers-2023_chunk_019 cited_by=A,B overlap=0.250 text='We then perform self-attention with each head: n ∑ j=1 h(ℓ) α(ℓ) ij v(ℓ) j (22) i = exp(q(ℓ)⊤ i k(ℓ) j ) α(ℓ) ij = j′=1 exp(q(ℓ)⊤ i k(ℓ) ∑n j′ ) Note that the output h(ℓ) i of each head is in reduced '
+    doc_self-attention-transformers-2023_chunk_020 cited_by=- overlap=0.250 text='compute our weights in matrix operations: α = softmax(x1:nQK⊤x⊤ 1:n) ∈Rn×n (25) and then compute the self-attention operation for all x1:n via: 1:n)x1:nV ∈Rn×d. (26) h1:n = softmax(x1:nQK⊤x⊤ Here’s a '
+    doc_self-attention-transformers-2023_chunk_021 cited_by=B overlap=0.250 text='then transpose the matrices to Rk,n,d/k, which intuitively should look like k sequences of length n and dimensionality d/k. This allows us to perform the batched softmax operation in parallel across t'
+  arm B-current+fix:
+    doc_self-attention-transformers-2023_chunk_017 cited_by=A overlap=0.625 text='Zuko made his uncle tea −∞ −∞ −∞ −∞ Zuko −∞ −∞ −∞ made −∞ −∞ his −∞ uncle tea Intuitively, these are the biggest components to understand. How- ever, as of 2023, by far the most-used architecture in N'
+    doc_self-attention-transformers-2023_chunk_018 cited_by=A,B overlap=0.750 text='the key-query dot products in order to carefully average two or more things. In Assignment 5, you’ll work through a bit of this intuition more carefully. What we’ll present now, multi-head self-attent'
+    doc_self-attention-transformers-2023_chunk_019 cited_by=A,B overlap=0.250 text='We then perform self-attention with each head: n ∑ j=1 h(ℓ) α(ℓ) ij v(ℓ) j (22) i = exp(q(ℓ)⊤ i k(ℓ) j ) α(ℓ) ij = j′=1 exp(q(ℓ)⊤ i k(ℓ) ∑n j′ ) Note that the output h(ℓ) i of each head is in reduced '
+    doc_self-attention-transformers-2023_chunk_020 cited_by=- overlap=0.250 text='compute our weights in matrix operations: α = softmax(x1:nQK⊤x⊤ 1:n) ∈Rn×n (25) and then compute the self-attention operation for all x1:n via: 1:n)x1:nV ∈Rn×d. (26) h1:n = softmax(x1:nQK⊤x⊤ Here’s a '
+    doc_self-attention-transformers-2023_chunk_021 cited_by=B overlap=0.250 text='then transpose the matrices to Rk,n,d/k, which intuitively should look like k sequences of length n and dimensionality d/k. This allows us to perform the batched softmax operation in parallel across t'
+  arm C-primary-only:
+    doc_self-attention-transformers-2023_chunk_017 cited_by=A overlap=0.625 text='Zuko made his uncle tea −∞ −∞ −∞ −∞ Zuko −∞ −∞ −∞ made −∞ −∞ his −∞ uncle tea Intuitively, these are the biggest components to understand. How- ever, as of 2023, by far the most-used architecture in N'
+    doc_self-attention-transformers-2023_chunk_018 cited_by=A,B overlap=0.500 text='the key-query dot products in order to carefully average two or more things. In Assignment 5, you’ll work through a bit of this intuition more carefully. What we’ll present now, multi-head self-attent'
+    doc_self-attention-transformers-2023_chunk_019 cited_by=A,B overlap=0.250 text='We then perform self-attention with each head: n ∑ j=1 h(ℓ) α(ℓ) ij v(ℓ) j (22) i = exp(q(ℓ)⊤ i k(ℓ) j ) α(ℓ) ij = j′=1 exp(q(ℓ)⊤ i k(ℓ) ∑n j′ ) Note that the output h(ℓ) i of each head is in reduced '
+    doc_self-attention-transformers-2023_chunk_020 cited_by=- overlap=0.250 text='compute our weights in matrix operations: α = softmax(x1:nQK⊤x⊤ 1:n) ∈Rn×n (25) and then compute the self-attention operation for all x1:n via: 1:n)x1:nV ∈Rn×d. (26) h1:n = softmax(x1:nQK⊤x⊤ Here’s a '
+    doc_self-attention-transformers-2023_chunk_021 cited_by=B overlap=0.250 text='then transpose the matrices to Rk,n,d/k, which intuitively should look like k sequences of length n and dimensionality d/k. This allows us to perform the batched softmax operation in parallel across t'
+  arm D-primary-only+fix:
+    doc_self-attention-transformers-2023_chunk_017 cited_by=A overlap=0.625 text='Zuko made his uncle tea −∞ −∞ −∞ −∞ Zuko −∞ −∞ −∞ made −∞ −∞ his −∞ uncle tea Intuitively, these are the biggest components to understand. How- ever, as of 2023, by far the most-used architecture in N'
+    doc_self-attention-transformers-2023_chunk_018 cited_by=A,B overlap=0.500 text='the key-query dot products in order to carefully average two or more things. In Assignment 5, you’ll work through a bit of this intuition more carefully. What we’ll present now, multi-head self-attent'
+    doc_self-attention-transformers-2023_chunk_019 cited_by=A,B overlap=0.250 text='We then perform self-attention with each head: n ∑ j=1 h(ℓ) α(ℓ) ij v(ℓ) j (22) i = exp(q(ℓ)⊤ i k(ℓ) j ) α(ℓ) ij = j′=1 exp(q(ℓ)⊤ i k(ℓ) ∑n j′ ) Note that the output h(ℓ) i of each head is in reduced '
+    doc_self-attention-transformers-2023_chunk_020 cited_by=- overlap=0.250 text='compute our weights in matrix operations: α = softmax(x1:nQK⊤x⊤ 1:n) ∈Rn×n (25) and then compute the self-attention operation for all x1:n via: 1:n)x1:nV ∈Rn×d. (26) h1:n = softmax(x1:nQK⊤x⊤ Here’s a '
+    doc_self-attention-transformers-2023_chunk_021 cited_by=B overlap=0.250 text='then transpose the matrices to Rk,n,d/k, which intuitively should look like k sequences of length n and dimensionality d/k. This allows us to perform the batched softmax operation in parallel across t'
+q008: What is the role of the Transformer decoder?
+  set A: ['doc_self-attention-transformers-2023_chunk_026']
+  set B: ['doc_self-attention-transformers-2023_chunk_025', 'doc_self-attention-transformers-2023_chunk_026']
+  relation: partial overlap
+  arm legacy-pypdf:
+    doc_self-attention-transformers-2023_chunk_025 cited_by=B overlap=0.600 text='[draft ] note 10 : self -attention & transformers cs 224n : natural language processing with deep learning 13 3.5 T ransformer Encoder A Transformer Encoder takes a single sequence w1:n, and performs '
+    doc_self-attention-transformers-2023_chunk_026 cited_by=A,B overlap=0.800 text='encoder so each position index can see the whole sequence,) and want strong representations for the whole sequence (again, possible because even the first token can see the whole future of the sequenc'
+  arm A-current:
+    doc_self-attention-transformers-2023_chunk_025 cited_by=B overlap=0.600 text='3.5 Transformer Encoder A Transformer Encoder takes a single sequence w1:n, and performs no future masking. It embeds the sequence with E to make x1:n, adds the position representation, and then appli'
+    doc_self-attention-transformers-2023_chunk_026 cited_by=A,B overlap=0.800 text='simply by using future masking at each application of self-attention. This ensures that the informational constraint (no cheating by looking at the future!) holds throughout the architecture. We show '
+  arm B-current+fix:
+    doc_self-attention-transformers-2023_chunk_025 cited_by=B overlap=0.600 text='3.5 Transformer Encoder A Transformer Encoder takes a single sequence w1:n, and performs no future masking. It embeds the sequence with E to make x1:n, adds the position representation, and then appli'
+    doc_self-attention-transformers-2023_chunk_026 cited_by=A,B overlap=0.800 text='simply by using future masking at each application of self-attention. This ensures that the informational constraint (no cheating by looking at the future!) holds throughout the architecture. We show '
+  arm C-primary-only:
+    doc_self-attention-transformers-2023_chunk_025 cited_by=B overlap=0.600 text='3.5 Transformer Encoder A Transformer Encoder takes a single sequence w1:n, and performs no future masking. It embeds the sequence with E to make x1:n, adds the position representation, and then appli'
+    doc_self-attention-transformers-2023_chunk_026 cited_by=A,B overlap=0.800 text='simply by using future masking at each application of self-attention. This ensures that the informational constraint (no cheating by looking at the future!) holds throughout the architecture. We show '
+  arm D-primary-only+fix:
+    doc_self-attention-transformers-2023_chunk_025 cited_by=B overlap=0.600 text='3.5 Transformer Encoder A Transformer Encoder takes a single sequence w1:n, and performs no future masking. It embeds the sequence with E to make x1:n, adds the position representation, and then appli'
+    doc_self-attention-transformers-2023_chunk_026 cited_by=A,B overlap=0.800 text='simply by using future masking at each application of self-attention. This ensures that the informational constraint (no cheating by looking at the future!) holds throughout the architecture. We show '
+q010: What problem does self-attention solve compared with recurrent architectures?
+  set A: ['doc_self-attention-transformers-2023_chunk_006', 'doc_self-attention-transformers-2023_chunk_007', 'doc_self-attention-transformers-2023_chunk_008']
+  set B: ['doc_self-attention-transformers-2023_chunk_005', 'doc_self-attention-transformers-2023_chunk_006', 'doc_self-attention-transformers-2023_chunk_007']
+  relation: uniform -1 shift
+  noisy-answer question: yes
+  arm legacy-pypdf:
+    doc_self-attention-transformers-2023_chunk_005 cited_by=B overlap=0.222 text='[draft ] note 10 : self -attention & transformers cs 224n : natural language processing with deep learning 3 sequence index (often called the dependence on “time”) highlighted in Equation 4. Paralleli'
+    doc_self-attention-transformers-2023_chunk_006 cited_by=A,B overlap=0.111 text='gets longer, there is only so much I can parallelize the computation of the network on a GPU because of the number of serial dependencies. (Serial meaning one-after-the- other.) 1 2 3 4 5 0 0 0 0 0 Zu'
+    doc_self-attention-transformers-2023_chunk_007 cited_by=A,B overlap=0.333 text='[draft ] note 10 : self -attention & transformers cs 224n : natural language processing with deep learning 4 the number of intermediate computations—matrix multiplies and nonlinearities, for example—t'
+    doc_self-attention-transformers-2023_chunk_008 cited_by=A overlap=0.444 text='we learned how to look back into the source sequence once per token of the translation. In this note, we’ll present an entire replacement for recurrent neural networks just based on attention. This wi'
+  arm A-current:
+    doc_self-attention-transformers-2023_chunk_005 cited_by=B overlap=0.222 text='sequence index (often called the dependence on “time”) highlighted in Equation 4. Parallelization issues with dependence on the sequence index. Modern graphics processing units (GPUs) are excellent at'
+    doc_self-attention-transformers-2023_chunk_006 cited_by=A,B overlap=0.111 text='of serial dependencies. (Serial meaning one-after-the- other.) 1 2 3 4 5 0 0 0 0 0 Zuko made his uncle tea As GPUs (and later, other accelerators like Tensor Processing Units (TPUs) became more powerf'
+    doc_self-attention-transformers-2023_chunk_007 cited_by=A,B overlap=0.444 text='the number of intermediate computations—matrix multiplies and nonlinearities, for example—that separate chef from is scales with the number of words between them. We visualize this in Figure 2. 1 2 3 '
+    doc_self-attention-transformers-2023_chunk_008 cited_by=A overlap=0.222 text='the value(s) of the key(s) most like the query. By “picking” and “most like,” we mean averaging overall values, putting more weight on those which correspond to the keys more like the query. In self- '
+  arm B-current+fix:
+    doc_self-attention-transformers-2023_chunk_005 cited_by=B overlap=0.222 text='sequence index (often called the dependence on “time”) highlighted in Equation 4. Parallelization issues with dependence on the sequence index. Modern graphics processing units (GPUs) are excellent at'
+    doc_self-attention-transformers-2023_chunk_006 cited_by=A,B overlap=0.111 text='of serial dependencies. (Serial meaning one-after-the- other.) 1 2 3 4 5 0 0 0 0 0 Zuko made his uncle tea As GPUs (and later, other accelerators like Tensor Processing Units (TPUs) became more powerf'
+    doc_self-attention-transformers-2023_chunk_007 cited_by=A,B overlap=0.444 text='the number of intermediate computations—matrix multiplies and nonlinearities, for example—that separate chef from is scales with the number of words between them. We visualize this in Figure 2. 1 2 3 '
+    doc_self-attention-transformers-2023_chunk_008 cited_by=A overlap=0.222 text='the value(s) of the key(s) most like the query. By “picking” and “most like,” we mean averaging overall values, putting more weight on those which correspond to the keys more like the query. In self- '
+  arm C-primary-only:
+    doc_self-attention-transformers-2023_chunk_005 cited_by=B overlap=0.222 text='sequence index (often called the dependence on “time”) highlighted in Equation 4. Parallelization issues with dependence on the sequence index. Modern graphics processing units (GPUs) are excellent at'
+    doc_self-attention-transformers-2023_chunk_006 cited_by=A,B overlap=0.111 text='of serial dependencies. (Serial meaning one-after-the- other.) 1 2 3 4 5 0 0 0 0 0 Zuko made his uncle tea As GPUs (and later, other accelerators like Tensor Processing Units (TPUs) became more powerf'
+    doc_self-attention-transformers-2023_chunk_007 cited_by=A,B overlap=0.444 text='the number of intermediate computations—matrix multiplies and nonlinearities, for example—that separate chef from is scales with the number of words between them. We visualize this in Figure 2. 1 2 3 '
+    doc_self-attention-transformers-2023_chunk_008 cited_by=A overlap=0.222 text='the value(s) of the key(s) most like the query. By “picking” and “most like,” we mean averaging overall values, putting more weight on those which correspond to the keys more like the query. In self- '
+  arm D-primary-only+fix:
+    doc_self-attention-transformers-2023_chunk_005 cited_by=B overlap=0.222 text='sequence index (often called the dependence on “time”) highlighted in Equation 4. Parallelization issues with dependence on the sequence index. Modern graphics processing units (GPUs) are excellent at'
+    doc_self-attention-transformers-2023_chunk_006 cited_by=A,B overlap=0.111 text='of serial dependencies. (Serial meaning one-after-the- other.) 1 2 3 4 5 0 0 0 0 0 Zuko made his uncle tea As GPUs (and later, other accelerators like Tensor Processing Units (TPUs) became more powerf'
+    doc_self-attention-transformers-2023_chunk_007 cited_by=A,B overlap=0.444 text='the number of intermediate computations—matrix multiplies and nonlinearities, for example—that separate chef from is scales with the number of words between them. We visualize this in Figure 2. 1 2 3 '
+    doc_self-attention-transformers-2023_chunk_008 cited_by=A overlap=0.222 text='the value(s) of the key(s) most like the query. By “picking” and “most like,” we mean averaging overall values, putting more weight on those which correspond to the keys more like the query. In self- '
+
+D. UNDISPUTED QUESTIONS
+------------------------
+q002: What is the purpose of the query, key, and value representations in self-attention?
+  legacy-pypdf: doc_self-attention-transformers-2023_chunk_009: '[draft ] note 10 : self -attention & transformers cs 224n : natural language processing with deep learning 5 Consider a ' | doc_self-attention-transformers-2023_chunk_010: 'information (in an informal sense,) from what other tokens, should be used in representing xi in context. The use of mat'
+  A-current: doc_self-attention-transformers-2023_chunk_009: 'Consider a token xi in the sequence x1:n. From it, we define a query qi = Qxi, for matrix Q ∈Rd×d. Then, for each token ' | doc_self-attention-transformers-2023_chunk_010: 'K, Q, V intuitively allow us to use different views of the xi for the different roles of key, query, and value. We perfo'
+  B-current+fix: doc_self-attention-transformers-2023_chunk_009: 'Consider a token xi in the sequence x1:n. From it, we define a query qi = Qxi, for matrix Q ∈Rd×d. Then, for each token ' | doc_self-attention-transformers-2023_chunk_010: 'K, Q, V intuitively allow us to use different views of the xi for the different roles of key, query, and value. We perfo'
+  C-primary-only: doc_self-attention-transformers-2023_chunk_009: 'Consider a token xi in the sequence x1:n. From it, we define a query qi = Qxi, for matrix Q ∈Rd×d. Then, for each token ' | doc_self-attention-transformers-2023_chunk_010: 'K, Q, V intuitively allow us to use different views of the xi for the different roles of key, query, and value. We perfo'
+  D-primary-only+fix: doc_self-attention-transformers-2023_chunk_009: 'Consider a token xi in the sequence x1:n. From it, we define a query qi = Qxi, for matrix Q ∈Rd×d. Then, for each token ' | doc_self-attention-transformers-2023_chunk_010: 'K, Q, V intuitively allow us to use different views of the xi for the different roles of key, query, and value. We perfo'
+q003: What is multi-head attention?
+  noisy-answer question: yes
+  legacy-pypdf: doc_self-attention-transformers-2023_chunk_017: '[draft ] note 10 : self -attention & transformers cs 224n : natural language processing with deep learning 9 Zuko made h' | doc_self-attention-transformers-2023_chunk_018: 'scaling—and of course, we’ll discuss how these components are combined to form the Transformer. Embeddings Add Position ' | doc_self-attention-transformers-2023_chunk_019: '[draft ] note 10 : self -attention & transformers cs 224n : natural language processing with deep learning 10 We then pe'
+  A-current: doc_self-attention-transformers-2023_chunk_017: 'Zuko made his uncle tea −∞ −∞ −∞ −∞ Zuko −∞ −∞ −∞ made −∞ −∞ his −∞ uncle tea Intuitively, these are the biggest compone' | doc_self-attention-transformers-2023_chunk_018: 'the key-query dot products in order to carefully average two or more things. In Assignment 5, you’ll work through a bit ' | doc_self-attention-transformers-2023_chunk_019: 'We then perform self-attention with each head: n ∑ j=1 h(ℓ) α(ℓ) ij v(ℓ) j (22) i = exp(q(ℓ)⊤ i k(ℓ) j ) α(ℓ) ij = j′=1 '
+  B-current+fix: doc_self-attention-transformers-2023_chunk_017: 'Zuko made his uncle tea −∞ −∞ −∞ −∞ Zuko −∞ −∞ −∞ made −∞ −∞ his −∞ uncle tea Intuitively, these are the biggest compone' | doc_self-attention-transformers-2023_chunk_018: 'the key-query dot products in order to carefully average two or more things. In Assignment 5, you’ll work through a bit ' | doc_self-attention-transformers-2023_chunk_019: 'We then perform self-attention with each head: n ∑ j=1 h(ℓ) α(ℓ) ij v(ℓ) j (22) i = exp(q(ℓ)⊤ i k(ℓ) j ) α(ℓ) ij = j′=1 '
+  C-primary-only: doc_self-attention-transformers-2023_chunk_017: 'Zuko made his uncle tea −∞ −∞ −∞ −∞ Zuko −∞ −∞ −∞ made −∞ −∞ his −∞ uncle tea Intuitively, these are the biggest compone' | doc_self-attention-transformers-2023_chunk_018: 'the key-query dot products in order to carefully average two or more things. In Assignment 5, you’ll work through a bit ' | doc_self-attention-transformers-2023_chunk_019: 'We then perform self-attention with each head: n ∑ j=1 h(ℓ) α(ℓ) ij v(ℓ) j (22) i = exp(q(ℓ)⊤ i k(ℓ) j ) α(ℓ) ij = j′=1 '
+  D-primary-only+fix: doc_self-attention-transformers-2023_chunk_017: 'Zuko made his uncle tea −∞ −∞ −∞ −∞ Zuko −∞ −∞ −∞ made −∞ −∞ his −∞ uncle tea Intuitively, these are the biggest compone' | doc_self-attention-transformers-2023_chunk_018: 'the key-query dot products in order to carefully average two or more things. In Assignment 5, you’ll work through a bit ' | doc_self-attention-transformers-2023_chunk_019: 'We then perform self-attention with each head: n ∑ j=1 h(ℓ) α(ℓ) ij v(ℓ) j (22) i = exp(q(ℓ)⊤ i k(ℓ) j ) α(ℓ) ij = j′=1 '
+q005: What is the difference between self-attention and cross-attention?
+  legacy-pypdf: doc_self-attention-transformers-2023_chunk_009: '[draft ] note 10 : self -attention & transformers cs 224n : natural language processing with deep learning 5 Consider a ' | doc_self-attention-transformers-2023_chunk_027: '[draft ] note 10 : self -attention & transformers cs 224n : natural language processing with deep learning 14 Cross-Atte'
+  A-current: doc_self-attention-transformers-2023_chunk_009: 'Consider a token xi in the sequence x1:n. From it, we define a query qi = Qxi, for matrix Q ∈Rd×d. Then, for each token ' | doc_self-attention-transformers-2023_chunk_027: 'Cross-Attention. Cross-attention uses one sequence to define the keys and values of self-attention, and another sequence'
+  B-current+fix: doc_self-attention-transformers-2023_chunk_009: 'Consider a token xi in the sequence x1:n. From it, we define a query qi = Qxi, for matrix Q ∈Rd×d. Then, for each token ' | doc_self-attention-transformers-2023_chunk_027: 'Cross-Attention. Cross-attention uses one sequence to define the keys and values of self-attention, and another sequence'
+  C-primary-only: doc_self-attention-transformers-2023_chunk_009: 'Consider a token xi in the sequence x1:n. From it, we define a query qi = Qxi, for matrix Q ∈Rd×d. Then, for each token ' | doc_self-attention-transformers-2023_chunk_027: 'Cross-Attention. Cross-attention uses one sequence to define the keys and values of self-attention, and another sequence'
+  D-primary-only+fix: doc_self-attention-transformers-2023_chunk_009: 'Consider a token xi in the sequence x1:n. From it, we define a query qi = Qxi, for matrix Q ∈Rd×d. Then, for each token ' | doc_self-attention-transformers-2023_chunk_027: 'Cross-Attention. Cross-attention uses one sequence to define the keys and values of self-attention, and another sequence'
+q006: Why are positional encodings needed?
+  noisy-answer question: yes
+  legacy-pypdf: doc_self-attention-transformers-2023_chunk_011: '[draft ] note 10 : self -attention & transformers cs 224n : natural language processing with deep learning 6 2.2 Positio' | doc_self-attention-transformers-2023_chunk_012: 'q⊤ sokthe; q⊤ sokbread; q⊤ sokso i\x11 (10) So, the weight αso,0, the amount that we look up the first word, (by writing ou' | doc_self-attention-transformers-2023_chunk_013: '[draft ] note 10 : self -attention & transformers cs 224n : natural language processing with deep learning 7 We then sim'
+  A-current: doc_self-attention-transformers-2023_chunk_011: '2.2 Position representations Consider the sequence the oven cooked the bread so. This is a different sequence than the b' | doc_self-attention-transformers-2023_chunk_012: 'is, αso,0 = exp(q⊤ sokthe) exp(q⊤ sokthe) + · · · + exp(q⊤ sokbread). (11) So, α ∈R5 are our weights, and we compute the' | doc_self-attention-transformers-2023_chunk_013: 'We then simply add embedded representation of the position of a word to its word embedding: ˜xi = Pi + xi (12) and perfo'
+  B-current+fix: doc_self-attention-transformers-2023_chunk_011: '2.2 Position representations Consider the sequence the oven cooked the bread so. This is a different sequence than the b' | doc_self-attention-transformers-2023_chunk_012: 'is, αso,0 = exp(q⊤ sokthe) exp(q⊤ sokthe) + · · · + exp(q⊤ sokbread). (11) So, α ∈R5 are our weights, and we compute the' | doc_self-attention-transformers-2023_chunk_013: 'We then simply add embedded representation of the position of a word to its word embedding: ˜xi = Pi + xi (12) and perfo'
+  C-primary-only: doc_self-attention-transformers-2023_chunk_011: '2.2 Position representations Consider the sequence the oven cooked the bread so. This is a different sequence than the b' | doc_self-attention-transformers-2023_chunk_012: 'is, αso,0 = exp(q⊤ sokthe) exp(q⊤ sokthe) + · · · + exp(q⊤ sokbread). (11) So, α ∈R5 are our weights, and we compute the' | doc_self-attention-transformers-2023_chunk_013: 'We then simply add embedded representation of the position of a word to its word embedding: ˜xi = Pi + xi (12) and perfo'
+  D-primary-only+fix: doc_self-attention-transformers-2023_chunk_011: '2.2 Position representations Consider the sequence the oven cooked the bread so. This is a different sequence than the b' | doc_self-attention-transformers-2023_chunk_012: 'is, αso,0 = exp(q⊤ sokthe) exp(q⊤ sokthe) + · · · + exp(q⊤ sokbread). (11) So, α ∈R5 are our weights, and we compute the' | doc_self-attention-transformers-2023_chunk_013: 'We then simply add embedded representation of the position of a word to its word embedding: ˜xi = Pi + xi (12) and perfo'
+q007: What is the role of the Transformer encoder?
+  legacy-pypdf: doc_self-attention-transformers-2023_chunk_025: '[draft ] note 10 : self -attention & transformers cs 224n : natural language processing with deep learning 13 3.5 T rans'
+  A-current: doc_self-attention-transformers-2023_chunk_025: '3.5 Transformer Encoder A Transformer Encoder takes a single sequence w1:n, and performs no future masking. It embeds th'
+  B-current+fix: doc_self-attention-transformers-2023_chunk_025: '3.5 Transformer Encoder A Transformer Encoder takes a single sequence w1:n, and performs no future masking. It embeds th'
+  C-primary-only: doc_self-attention-transformers-2023_chunk_025: '3.5 Transformer Encoder A Transformer Encoder takes a single sequence w1:n, and performs no future masking. It embeds th'
+  D-primary-only+fix: doc_self-attention-transformers-2023_chunk_025: '3.5 Transformer Encoder A Transformer Encoder takes a single sequence w1:n, and performs no future masking. It embeds th'
+q009: What is scaled dot-product attention?
+  legacy-pypdf: doc_self-attention-transformers-2023_chunk_024: 'Norm . Such a layer might look like: hpre-norm = f (LN(h)) + h, ( 30) where f is either a feed-forward operation or a se'
+  A-current: doc_self-attention-transformers-2023_chunk_024: 'self-attention opera- tion, (this is known as pre-normalization), or like: hpost-norm = LN( f (h) + h), (31) which is kn'
+  B-current+fix: doc_self-attention-transformers-2023_chunk_024: 'self-attention opera- tion, (this is known as pre-normalization), or like: hpost-norm = LN( f (h) + h), (31) which is kn'
+  C-primary-only: doc_self-attention-transformers-2023_chunk_024: 'self-attention opera- tion, (this is known as pre-normalization), or like: hpost-norm = LN( f (h) + h), (31) which is kn'
+  D-primary-only+fix: doc_self-attention-transformers-2023_chunk_024: 'self-attention opera- tion, (this is known as pre-normalization), or like: hpost-norm = LN( f (h) + h), (31) which is kn'
+
+E. FLAGS
+--------
+legacy-pypdf missing relevant IDs: []
+A-current missing relevant IDs: []
+B-current+fix missing relevant IDs: []
+C-primary-only missing relevant IDs: []
+D-primary-only+fix missing relevant IDs: []
+Questions with no relevant chunks: []
+Chunks whose text differs between arms: 38
+
+F. REMAPS
+---------
+Use --propose-remap with explicit --from and --to to write one pair.
+
+H. EVIDENCE-LOSS CHECK
+-----------------------
+q001: What is self-attention?
+  set A page 4: dropped_overlap=0.000 retained_overlap=0.500 higher=False dropped_first_300='with deep learning 4 Figure 2 A RNN unrolled in time The rectangles are intermediate states of the RNN e g the first row is the embedding layer and the second row is the RNN hidden state at each time step and the number in the rectangle is roughly the number of operations separating lexical informat'
+  set A page 5: dropped_overlap=0.000 retained_overlap=1.000 higher=False dropped_first_300='with deep learning 5 Tkj softmax'
+  set B page 4: dropped_overlap=0.000 retained_overlap=0.500 higher=False dropped_first_300='with deep learning 4 Figure 2 A RNN unrolled in time The rectangles are intermediate states of the RNN e g the first row is the embedding layer and the second row is the RNN hidden state at each time step and the number in the rectangle is roughly the number of operations separating lexical informat'
+  set B page 5: dropped_overlap=0.000 retained_overlap=1.000 higher=False dropped_first_300='with deep learning 5 Tkj softmax'
+q002: What is the purpose of the query, key, and value representations in self-attention?
+  set A page 5: dropped_overlap=0.000 retained_overlap=0.778 higher=False dropped_first_300='with deep learning 5 Tkj softmax'
+  set B page 5: dropped_overlap=0.000 retained_overlap=0.778 higher=False dropped_first_300='with deep learning 5 Tkj softmax'
+q003: What is multi-head attention?
+  set A page 9: dropped_overlap=0.333 retained_overlap=1.000 higher=False dropped_first_300='with deep learning 9 Figure 3 Diagram of autoregressive future masking in self attention Words in each row have words in the future masked out e g Zuko can only attend to Zuko while made can attend to Zuko and made Probabilities Softmax Linear Add Norm Feed Forward Repeat for number of encoder block'
+  set A page 10: dropped_overlap=0.000 retained_overlap=0.333 higher=False dropped_first_300='with deep learning 10 23'
+  set B page 9: dropped_overlap=0.333 retained_overlap=1.000 higher=False dropped_first_300='with deep learning 9 Figure 3 Diagram of autoregressive future masking in self attention Words in each row have words in the future masked out e g Zuko can only attend to Zuko while made can attend to Zuko and made Probabilities Softmax Linear Add Norm Feed Forward Repeat for number of encoder block'
+  set B page 10: dropped_overlap=0.000 retained_overlap=0.333 higher=False dropped_first_300='with deep learning 10 23'
+q004: Why does the Transformer use multiple attention heads?
+  set A page 9: dropped_overlap=0.375 retained_overlap=0.875 higher=False dropped_first_300='with deep learning 9 Figure 3 Diagram of autoregressive future masking in self attention Words in each row have words in the future masked out e g Zuko can only attend to Zuko while made can attend to Zuko and made Probabilities Softmax Linear Add Norm Feed Forward Repeat for number of encoder block'
+  set A page 10: dropped_overlap=0.000 retained_overlap=0.375 higher=False dropped_first_300='with deep learning 10 23'
+  set B page 9: dropped_overlap=0.375 retained_overlap=0.875 higher=False dropped_first_300='with deep learning 9 Figure 3 Diagram of autoregressive future masking in self attention Words in each row have words in the future masked out e g Zuko can only attend to Zuko while made can attend to Zuko and made Probabilities Softmax Linear Add Norm Feed Forward Repeat for number of encoder block'
+  set B page 10: dropped_overlap=0.000 retained_overlap=0.375 higher=False dropped_first_300='with deep learning 10 23'
+  set B page 11: dropped_overlap=0.000 retained_overlap=0.250 higher=False dropped_first_300='with deep learning 11 k'
+q005: What is the difference between self-attention and cross-attention?
+  set A page 5: dropped_overlap=0.000 retained_overlap=0.714 higher=False dropped_first_300='with deep learning 5 Tkj softmax'
+  set A page 14: dropped_overlap=0.000 retained_overlap=0.857 higher=False dropped_first_300='with deep learning 14'
+  set B page 5: dropped_overlap=0.000 retained_overlap=0.714 higher=False dropped_first_300='with deep learning 5 Tkj softmax'
+  set B page 14: dropped_overlap=0.000 retained_overlap=0.857 higher=False dropped_first_300='with deep learning 14'
+q006: Why are positional encodings needed?
+  set A page 6: dropped_overlap=0.000 retained_overlap=0.200 higher=False dropped_first_300='with deep learning 6 i sokbread q sokso 10'
+  set A page 7: dropped_overlap=0.000 retained_overlap=0.200 higher=False dropped_first_300='with deep learning 7 14'
+  set B page 6: dropped_overlap=0.000 retained_overlap=0.200 higher=False dropped_first_300='with deep learning 6 i sokbread q sokso 10'
+  set B page 7: dropped_overlap=0.000 retained_overlap=0.200 higher=False dropped_first_300='with deep learning 7 14'
+q007: What is the role of the Transformer encoder?
+  set A page 13: dropped_overlap=0.600 retained_overlap=0.800 higher=False dropped_first_300='with deep learning 13 Probabilities Softmax Linear Add Norm Feed Forward Repeat for number of encoder blocks Add Norm Multi Head Attention Block Add Position Embeddings Embeddings Encoder Inputs Transformer Encoder Figure 5 Diagram of the Transformer Encoder'
+  set B page 13: dropped_overlap=0.600 retained_overlap=0.800 higher=False dropped_first_300='with deep learning 13 Probabilities Softmax Linear Add Norm Feed Forward Repeat for number of encoder blocks Add Norm Multi Head Attention Block Add Position Embeddings Embeddings Encoder Inputs Transformer Encoder Figure 5 Diagram of the Transformer Encoder'
+q008: What is the role of the Transformer decoder?
+  set A page 13: dropped_overlap=0.400 retained_overlap=0.800 higher=False dropped_first_300='with deep learning 13 Probabilities Softmax Linear Add Norm Feed Forward Repeat for number of encoder blocks Add Norm Multi Head Attention Block Add Position Embeddings Embeddings Encoder Inputs Transformer Encoder Figure 5 Diagram of the Transformer Encoder'
+  set B page 13: dropped_overlap=0.400 retained_overlap=0.800 higher=False dropped_first_300='with deep learning 13 Probabilities Softmax Linear Add Norm Feed Forward Repeat for number of encoder blocks Add Norm Multi Head Attention Block Add Position Embeddings Embeddings Encoder Inputs Transformer Encoder Figure 5 Diagram of the Transformer Encoder'
+q009: What is scaled dot-product attention?
+  set A page 12: dropped_overlap=0.000 retained_overlap=0.500 higher=False dropped_first_300='with deep learning 12'
+  set B page 12: dropped_overlap=0.000 retained_overlap=0.500 higher=False dropped_first_300='with deep learning 12'
+q010: What problem does self-attention solve compared with recurrent architectures?
+  set A page 3: dropped_overlap=0.111 retained_overlap=0.222 higher=False dropped_first_300='with deep learning 3 Figure 1 A RNN unrolled in time The rectangles are intermediate states of the RNN e g the first row is the embedding layer and the second row is the RNN hidden state at each time step and the number in the rectangle is the number of serial operations that need to be performed be'
+  set A page 4: dropped_overlap=0.111 retained_overlap=0.444 higher=False dropped_first_300='with deep learning 4 Figure 2 A RNN unrolled in time The rectangles are intermediate states of the RNN e g the first row is the embedding layer and the second row is the RNN hidden state at each time step and the number in the rectangle is roughly the number of operations separating lexical informat'
+  set B page 3: dropped_overlap=0.111 retained_overlap=0.222 higher=False dropped_first_300='with deep learning 3 Figure 1 A RNN unrolled in time The rectangles are intermediate states of the RNN e g the first row is the embedding layer and the second row is the RNN hidden state at each time step and the number in the rectangle is the number of serial operations that need to be performed be'
+  set B page 4: dropped_overlap=0.111 retained_overlap=0.444 higher=False dropped_first_300='with deep learning 4 Figure 2 A RNN unrolled in time The rectangles are intermediate states of the RNN e g the first row is the embedding layer and the second row is the RNN hidden state at each time step and the number in the rectangle is roughly the number of operations separating lexical informat'
+
+I. LEAKED HEADER CHUNK COUNTS
+------------------------------
+legacy-pypdf: {'chunks_starting_with_leaked_header': 0, 'chunks_ending_with_leaked_header': 0, 'chunks_containing_leaked_header': 18}
+A-current: {'chunks_starting_with_leaked_header': 0, 'chunks_ending_with_leaked_header': 6, 'chunks_containing_leaked_header': 17}
+B-current+fix: {'chunks_starting_with_leaked_header': 0, 'chunks_ending_with_leaked_header': 0, 'chunks_containing_leaked_header': 0}
+C-primary-only: {'chunks_starting_with_leaked_header': 0, 'chunks_ending_with_leaked_header': 0, 'chunks_containing_leaked_header': 0}
+D-primary-only+fix: {'chunks_starting_with_leaked_header': 0, 'chunks_ending_with_leaked_header': 0, 'chunks_containing_leaked_header': 0}
+

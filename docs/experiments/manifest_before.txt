@@ -1,0 +1,39 @@
+PHASE 1 SAFETY MANIFEST BEFORE CODE EDITS
+=========================================
+
+Timestamp context: 2026-10-07
+Repository: C:\Users\PARTH\Parth_Projects\RAG_Chatbot
+
+Git commit:
+41b6c3b3f3410bdc9176e0380c8704a74ebc4fb3
+
+Git status --short before Phase 1 edits:
+ M .env.example
+ M compose.yaml
+ M file_structure.txt
+ M project_report.txt
+ M pyproject.toml
+ M scripts/inspect_chunks.py
+ M src/rag/config/settings.py
+?? phase0_audit_report.txt
+?? retrieval_representation_experiment_plan.txt
+
+SHA-256 files:
+
+facb833c18d3a87c66a5050b05eac07a59799a9c61fb301d3abbdcff61beaaf7  data/raw/self-attention-transformers-2023.pdf
+
+94746a387b7638b4f55d0e3bf70d61ce9aee8255fa1157aa92c6164f9cdaac4a  data/evaluation/retrieval_questions.json
+8f3589bd5675258be8019e852fd9e75b64d68f55d83e0c86714fdd5d13e572ed  data/evaluation/retrieval_questions_ground_truth.json
+
+44ba856008d3e0de05aef64b225ae87bea157d418feb2f030ad2710230b57336  data/evaluation/retrieval_results_bow_ground_truth.json
+2f2a0488fcdd82bbeda60c0f5ce50c2b6e65f0a37492135e50f927c929987cd1  data/evaluation/retrieval_results_tfidf.json
+dadd15469d4005533c88a29d6ee1969a61bb4b603b9e19325403f07204b1639c  data/evaluation/retrieval_results_tfidf_ground_truth.json
+262a6dd593169a85c21c3eed69fcf9dd4e53c8de26987a41edca3ced562a6749  data/evaluation/retrieval_results_tfidf_ground_truth_v2.json
+bd7fb0619dc990da12703814fcf59c18a798c82f14a488c1a9ec63798d10bded  data/evaluation/retrieval_results.json
+290fefb2b8380a4cbc55b3f3b44fe2d31344d5ec810d98e09ddc2aa7e9aa2fc2  data/evaluation/reranker_results.json
+92c88e9030c58a3051938fa64c5fe536e9bc990f9f090ce8e3a13fe92419afad  data/evaluation/reranked_generation_results.json
+f9af3da8e5f4627c0362f6f4e07d021d598f29bc964ade327454757ee32d4121  data/evaluation/generation_results.json
+5c7174fa23f1d3a6001cc262205bcfbf7d2fdded117596a1d41f829fe4c12415  data/evaluation/hybrid_retrieval_results.json
+08315ebf696a7a719a6350239d811c1b2e8b6cca5156afc2c13964664864ea7c  data/evaluation/chunking_experiment_results.json
+Note: data/evaluation/.gitkeep is an empty file. Its correct SHA-256 is:
+e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855  data/evaluation/.gitkeep

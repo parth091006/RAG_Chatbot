@@ -13,6 +13,17 @@ if str(PROJECT_ROOT) not in sys.path:
 
 
 from src.rag.pipeline import PhaseOneRAG
+from src.rag.evaluation.run_metadata import (
+    build_run_metadata,
+    resolve_extraction,
+    safe_write_json,
+    serialize_chunk,
+)
+from src.rag.evaluation.noise_metrics import (
+    context_noise_per_chunk,
+    diagram_noise_ratio,
+    header_leak_counts,
+)
 from src.rag.retrieval.reranker import Reranker
 from src.rag.evaluation.retrieval_metrics import mrr, recall_at_k
 
@@ -24,6 +35,10 @@ def evaluate_questions(
     candidate_k: int = 10,
     top_k: int = 5,
     reranker_model: str = "cross-encoder/ms-marco-MiniLM-L-6-v2",
+    extraction: str = "legacy-pypdf",
+    header_fix: bool = False,
+    metadata_enabled: bool = False,
+    force: bool = False,
 ) -> None:
     """Evaluate TF-IDF retrieval followed by cross-encoder reranking."""
 
@@ -35,6 +50,8 @@ def evaluate_questions(
     rag = PhaseOneRAG(
         pdf_path,
         embedding_method="tfidf",
+        extraction=extraction,
+        header_fix=header_fix,
     )
 
     # Keep the canonical Phase-1 chunking configuration.
@@ -125,25 +142,54 @@ def evaluate_questions(
         for index, score in reranked_results:
             question_result["results"].append(
                 {
-                    "chunk": chunks[index],
+                    "chunk": serialize_chunk(
+                        chunks[index],
+                        include_optional=metadata_enabled,
+                    ),
                     "score": float(score),
                 }
             )
 
+        if metadata_enabled:
+            context_chunks = [
+                chunks[index]
+                for index, _ in reranked_results
+            ]
+            question_result["noise_diagnostics"] = {
+                "header_leak": header_leak_counts(
+                    context_chunks
+                ),
+                "diagram_noise_ratio": diagram_noise_ratio(
+                    context_chunks
+                ),
+                "context_noise_per_chunk": context_noise_per_chunk(
+                    context_chunks
+                ),
+            }
+
         results.append(question_result)
 
-    output_path.parent.mkdir(
-        parents=True,
-        exist_ok=True,
-    )
+    metadata = None
+    if metadata_enabled:
+        metadata = build_run_metadata(
+            extraction=extraction,
+            header_fix=header_fix,
+            embedding_method="tfidf",
+            chunk_size=250,
+            overlap=50,
+            pipeline=rag,
+            pdf_path=pdf_path,
+            question_path=questions_path,
+            candidate_k=candidate_k,
+            top_k=top_k,
+            reranker_model=reranker_model,
+        )
 
-    output_path.write_text(
-        json.dumps(
-            results,
-            indent=2,
-            ensure_ascii=False,
-        ),
-        encoding="utf-8",
+    safe_write_json(
+        output_path,
+        results,
+        metadata=metadata,
+        force=force,
     )
 
     # Print per-question results.
@@ -271,6 +317,22 @@ def main() -> None:
         default="cross-encoder/ms-marco-MiniLM-L-6-v2",
     )
 
+    parser.add_argument(
+        "--extraction",
+        choices=["legacy-pypdf", "current", "primary-only"],
+        default=None,
+    )
+
+    parser.add_argument(
+        "--header-fix",
+        action="store_true",
+    )
+
+    parser.add_argument(
+        "--force",
+        action="store_true",
+    )
+
     args = parser.parse_args()
 
     if args.candidate_k <= 0:
@@ -284,6 +346,15 @@ def main() -> None:
             "--top-k cannot be greater than --candidate-k."
         )
 
+    try:
+        extraction, metadata_enabled = resolve_extraction(
+            args.extraction,
+            args.header_fix,
+            "legacy-pypdf",
+        )
+    except ValueError as exc:
+        parser.error(str(exc))
+
     evaluate_questions(
         pdf_path=args.pdf,
         questions_path=args.questions,
@@ -291,6 +362,10 @@ def main() -> None:
         candidate_k=args.candidate_k,
         top_k=args.top_k,
         reranker_model=args.reranker_model,
+        extraction=extraction,
+        header_fix=args.header_fix,
+        metadata_enabled=metadata_enabled,
+        force=args.force,
     )
 
 

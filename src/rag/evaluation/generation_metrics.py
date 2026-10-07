@@ -23,6 +23,7 @@ def faithfulness_score(
     """Estimate how much of the answer is supported by the evidence.
 
     This is a lexical proxy, not a semantic faithfulness metric.
+    A score of 1.0 does not imply that the answer is clean or relevant.
 
     A score of 1.0 means every normalized content term in the answer
     also appears in the supplied evidence.

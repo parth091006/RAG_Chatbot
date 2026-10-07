@@ -1,0 +1,312 @@
+{
+  "chunk_count": 38,
+  "chunks": [
+    {
+      "chunk_id": "doc_self-attention-transformers-2023_chunk_001",
+      "document_id": "doc_self-attention-transformers-2023",
+      "document_name": "self-attention-transformers-2023.pdf",
+      "page_number": 1,
+      "sha256_normalized_text": "3cef520139a024ad07b194767ebfe3f81d953bd0d37a9583c1f3c81f19647e33",
+      "word_count": 250
+    },
+    {
+      "chunk_id": "doc_self-attention-transformers-2023_chunk_002",
+      "document_id": "doc_self-attention-transformers-2023",
+      "document_name": "self-attention-transformers-2023.pdf",
+      "page_number": 1,
+      "sha256_normalized_text": "76577306f1ae211e61de8dfc4b903791f467f8c9b0984194702838b45d763863",
+      "word_count": 188
+    },
+    {
+      "chunk_id": "doc_self-attention-transformers-2023_chunk_003",
+      "document_id": "doc_self-attention-transformers-2023",
+      "document_name": "self-attention-transformers-2023.pdf",
+      "page_number": 2,
+      "sha256_normalized_text": "495e117b12d9d1dcba9e82a69aa7fb0b4982b275cdd9f9310178872270ecefc1",
+      "word_count": 250
+    },
+    {
+      "chunk_id": "doc_self-attention-transformers-2023_chunk_004",
+      "document_id": "doc_self-attention-transformers-2023",
+      "document_name": "self-attention-transformers-2023.pdf",
+      "page_number": 2,
+      "sha256_normalized_text": "d79cf2a2879a31540504971bcf729a426ff3746677841a8476350e48949eaa36",
+      "word_count": 243
+    },
+    {
+      "chunk_id": "doc_self-attention-transformers-2023_chunk_005",
+      "document_id": "doc_self-attention-transformers-2023",
+      "document_name": "self-attention-transformers-2023.pdf",
+      "page_number": 3,
+      "sha256_normalized_text": "58465805aee3e6897e0c4aa26114add13dc76a1c359d9ac57f935d987c6f9522",
+      "word_count": 250
+    },
+    {
+      "chunk_id": "doc_self-attention-transformers-2023_chunk_006",
+      "document_id": "doc_self-attention-transformers-2023",
+      "document_name": "self-attention-transformers-2023.pdf",
+      "page_number": 3,
+      "sha256_normalized_text": "51cea27d2eca9db05bce8f7bd53c877cdd13af9290667dc49bfbb36e6dfce993",
+      "word_count": 198
+    },
+    {
+      "chunk_id": "doc_self-attention-transformers-2023_chunk_007",
+      "document_id": "doc_self-attention-transformers-2023",
+      "document_name": "self-attention-transformers-2023.pdf",
+      "page_number": 4,
+      "sha256_normalized_text": "dc5a346aa113e154bd0b659acafd563a91aca72700ebad2982861d1d3dd0fc7e",
+      "word_count": 250
+    },
+    {
+      "chunk_id": "doc_self-attention-transformers-2023_chunk_008",
+      "document_id": "doc_self-attention-transformers-2023",
+      "document_name": "self-attention-transformers-2023.pdf",
+      "page_number": 4,
+      "sha256_normalized_text": "a5505978403820f0ed80ad4af5c802a31b25684a702693ef1c7cb8b46aa5df23",
+      "word_count": 182
+    },
+    {
+      "chunk_id": "doc_self-attention-transformers-2023_chunk_009",
+      "document_id": "doc_self-attention-transformers-2023",
+      "document_name": "self-attention-transformers-2023.pdf",
+      "page_number": 5,
+      "sha256_normalized_text": "98ec7ce2f76494b2b7c084066712a71f724ed962f7e0aac2bc1618c3de36e61f",
+      "word_count": 250
+    },
+    {
+      "chunk_id": "doc_self-attention-transformers-2023_chunk_010",
+      "document_id": "doc_self-attention-transformers-2023",
+      "document_name": "self-attention-transformers-2023.pdf",
+      "page_number": 5,
+      "sha256_normalized_text": "26db716b3fd841c5d5efe473e402a2d0171efdd64cf90f9ff95ef254ae0df3b2",
+      "word_count": 94
+    },
+    {
+      "chunk_id": "doc_self-attention-transformers-2023_chunk_011",
+      "document_id": "doc_self-attention-transformers-2023",
+      "document_name": "self-attention-transformers-2023.pdf",
+      "page_number": 6,
+      "sha256_normalized_text": "06b78d510b574639471f59da81c911c9943eda3a1f5cd1fadfa9eca999567652",
+      "word_count": 250
+    },
+    {
+      "chunk_id": "doc_self-attention-transformers-2023_chunk_012",
+      "document_id": "doc_self-attention-transformers-2023",
+      "document_name": "self-attention-transformers-2023.pdf",
+      "page_number": 6,
+      "sha256_normalized_text": "d631de5a3c90d77e5b2b7d2032377f40024eee1838e3f8732a70da8756a2926d",
+      "word_count": 239
+    },
+    {
+      "chunk_id": "doc_self-attention-transformers-2023_chunk_013",
+      "document_id": "doc_self-attention-transformers-2023",
+      "document_name": "self-attention-transformers-2023.pdf",
+      "page_number": 7,
+      "sha256_normalized_text": "dfe439e063c85277a7576f93d4e72a0e70c48609d11d0ba978129eec1da3a2fa",
+      "word_count": 250
+    },
+    {
+      "chunk_id": "doc_self-attention-transformers-2023_chunk_014",
+      "document_id": "doc_self-attention-transformers-2023",
+      "document_name": "self-attention-transformers-2023.pdf",
+      "page_number": 7,
+      "sha256_normalized_text": "775f2f4a48d90136bd6d27b88fb454a04ea225c6230b704b51e1cfd49e71b367",
+      "word_count": 184
+    },
+    {
+      "chunk_id": "doc_self-attention-transformers-2023_chunk_015",
+      "document_id": "doc_self-attention-transformers-2023",
+      "document_name": "self-attention-transformers-2023.pdf",
+      "page_number": 8,
+      "sha256_normalized_text": "b6e4ce6126942f5a458f1724029dc8a5614a132d5e6f33095b359e3c02ce0e12",
+      "word_count": 250
+    },
+    {
+      "chunk_id": "doc_self-attention-transformers-2023_chunk_016",
+      "document_id": "doc_self-attention-transformers-2023",
+      "document_name": "self-attention-transformers-2023.pdf",
+      "page_number": 8,
+      "sha256_normalized_text": "17b8c3f40ff8e075e8ff92728dacfb4ed7c995316a42c683a21ca91cbfd1b690",
+      "word_count": 224
+    },
+    {
+      "chunk_id": "doc_self-attention-transformers-2023_chunk_017",
+      "document_id": "doc_self-attention-transformers-2023",
+      "document_name": "self-attention-transformers-2023.pdf",
+      "page_number": 9,
+      "sha256_normalized_text": "05d81e225d546576fd16d76f93cc028edbe48a56c347d6847ece66ffe7e4066c",
+      "word_count": 250
+    },
+    {
+      "chunk_id": "doc_self-attention-transformers-2023_chunk_018",
+      "document_id": "doc_self-attention-transformers-2023",
+      "document_name": "self-attention-transformers-2023.pdf",
+      "page_number": 9,
+      "sha256_normalized_text": "4454cd317baa8be9aef1f88c0877d5b591a9f80089b3bd847188ae78bdb4feb3",
+      "word_count": 215
+    },
+    {
+      "chunk_id": "doc_self-attention-transformers-2023_chunk_019",
+      "document_id": "doc_self-attention-transformers-2023",
+      "document_name": "self-attention-transformers-2023.pdf",
+      "page_number": 10,
+      "sha256_normalized_text": "e2e53c580936f11737bd047d5f3c8298a5bee03c41e35dbf56dd7fd3bb6bd1b3",
+      "word_count": 250
+    },
+    {
+      "chunk_id": "doc_self-attention-transformers-2023_chunk_020",
+      "document_id": "doc_self-attention-transformers-2023",
+      "document_name": "self-attention-transformers-2023.pdf",
+      "page_number": 10,
+      "sha256_normalized_text": "401bd0ef6094e7e734cbd2a0991e3dd1157486437ec6d92a2e48395f8b01ae22",
+      "word_count": 110
+    },
+    {
+      "chunk_id": "doc_self-attention-transformers-2023_chunk_021",
+      "document_id": "doc_self-attention-transformers-2023",
+      "document_name": "self-attention-transformers-2023.pdf",
+      "page_number": 11,
+      "sha256_normalized_text": "424f5e2f431f0a7032179f001131acdc2926a0b0637fd67197faf847512a1007",
+      "word_count": 250
+    },
+    {
+      "chunk_id": "doc_self-attention-transformers-2023_chunk_022",
+      "document_id": "doc_self-attention-transformers-2023",
+      "document_name": "self-attention-transformers-2023.pdf",
+      "page_number": 11,
+      "sha256_normalized_text": "9c893ab90becfb524d48e3117968c8de6a9150bf36b7cc8f1fb455be2039b74b",
+      "word_count": 196
+    },
+    {
+      "chunk_id": "doc_self-attention-transformers-2023_chunk_023",
+      "document_id": "doc_self-attention-transformers-2023",
+      "document_name": "self-attention-transformers-2023.pdf",
+      "page_number": 12,
+      "sha256_normalized_text": "87e72cc6acbb1bdb5fab9bea55d1d94f63cbeb368c180b6c19c98f006e3abff9",
+      "word_count": 250
+    },
+    {
+      "chunk_id": "doc_self-attention-transformers-2023_chunk_024",
+      "document_id": "doc_self-attention-transformers-2023",
+      "document_name": "self-attention-transformers-2023.pdf",
+      "page_number": 12,
+      "sha256_normalized_text": "df980c1e199cd981ce1702d0c61563a30936745b88ebfd5df9f9589216747103",
+      "word_count": 160
+    },
+    {
+      "chunk_id": "doc_self-attention-transformers-2023_chunk_025",
+      "document_id": "doc_self-attention-transformers-2023",
+      "document_name": "self-attention-transformers-2023.pdf",
+      "page_number": 13,
+      "sha256_normalized_text": "7db1ec38d021b3053fa6ededc7e3d771f0271de9d36113d263580c0742ec88dc",
+      "word_count": 250
+    },
+    {
+      "chunk_id": "doc_self-attention-transformers-2023_chunk_026",
+      "document_id": "doc_self-attention-transformers-2023",
+      "document_name": "self-attention-transformers-2023.pdf",
+      "page_number": 13,
+      "sha256_normalized_text": "79dfa7002e48f2d91c4dd28ad4f8dacf0aa9cce0689daa1751ca5f5d337a5bb7",
+      "word_count": 204
+    },
+    {
+      "chunk_id": "doc_self-attention-transformers-2023_chunk_027",
+      "document_id": "doc_self-attention-transformers-2023",
+      "document_name": "self-attention-transformers-2023.pdf",
+      "page_number": 14,
+      "sha256_normalized_text": "0976dd80ae3e75a602261ee47b90500ac18d51d0003d254f0bfd6645bf51da66",
+      "word_count": 250
+    },
+    {
+      "chunk_id": "doc_self-attention-transformers-2023_chunk_028",
+      "document_id": "doc_self-attention-transformers-2023",
+      "document_name": "self-attention-transformers-2023.pdf",
+      "page_number": 14,
+      "sha256_normalized_text": "c8b259b29014ccab8c4d0df0568da7ed7548a8b296899b1a7168f0dfc381d4c0",
+      "word_count": 218
+    },
+    {
+      "chunk_id": "doc_self-attention-transformers-2023_chunk_029",
+      "document_id": "doc_self-attention-transformers-2023",
+      "document_name": "self-attention-transformers-2023.pdf",
+      "page_number": 15,
+      "sha256_normalized_text": "cf5a433b8c54d1e93646c4e32caa082e751fc63bcb0f31a8bf497fd458290d36",
+      "word_count": 89
+    },
+    {
+      "chunk_id": "doc_self-attention-transformers-2023_chunk_030",
+      "document_id": "doc_self-attention-transformers-2023",
+      "document_name": "self-attention-transformers-2023.pdf",
+      "page_number": 16,
+      "sha256_normalized_text": "43db94223b1f46012d21748f2a34f153e3991412579153f5074fcc6108d22d3e",
+      "word_count": 250
+    },
+    {
+      "chunk_id": "doc_self-attention-transformers-2023_chunk_031",
+      "document_id": "doc_self-attention-transformers-2023",
+      "document_name": "self-attention-transformers-2023.pdf",
+      "page_number": 16,
+      "sha256_normalized_text": "9fc5fcbb078c2e886a1648270ce9d94d35fdf89f9a58f98fa5e938095bdfa433",
+      "word_count": 250
+    },
+    {
+      "chunk_id": "doc_self-attention-transformers-2023_chunk_032",
+      "document_id": "doc_self-attention-transformers-2023",
+      "document_name": "self-attention-transformers-2023.pdf",
+      "page_number": 16,
+      "sha256_normalized_text": "2c981562ffc2cfd66a1bcf2ccd8318cfd63ee365a15ae4c9be10b42c200e2ffd",
+      "word_count": 178
+    },
+    {
+      "chunk_id": "doc_self-attention-transformers-2023_chunk_033",
+      "document_id": "doc_self-attention-transformers-2023",
+      "document_name": "self-attention-transformers-2023.pdf",
+      "page_number": 17,
+      "sha256_normalized_text": "5a402931ba2627b0b9be7e2601d7792e289216cb373b6f6ce853ce9919efa39f",
+      "word_count": 250
+    },
+    {
+      "chunk_id": "doc_self-attention-transformers-2023_chunk_034",
+      "document_id": "doc_self-attention-transformers-2023",
+      "document_name": "self-attention-transformers-2023.pdf",
+      "page_number": 17,
+      "sha256_normalized_text": "528e6f0c7d58b94c7706a21d615d23ae2ff3268a304524e4584d71034c7b54d4",
+      "word_count": 250
+    },
+    {
+      "chunk_id": "doc_self-attention-transformers-2023_chunk_035",
+      "document_id": "doc_self-attention-transformers-2023",
+      "document_name": "self-attention-transformers-2023.pdf",
+      "page_number": 17,
+      "sha256_normalized_text": "6e249bd8bd9bdb5f33eff653fa06c3df5bb0199133b9e925462d6ddf49ed7663",
+      "word_count": 250
+    },
+    {
+      "chunk_id": "doc_self-attention-transformers-2023_chunk_036",
+      "document_id": "doc_self-attention-transformers-2023",
+      "document_name": "self-attention-transformers-2023.pdf",
+      "page_number": 17,
+      "sha256_normalized_text": "e181ca9c1257e2f9cbb1b71b035c3935644af8469767dc8189d42f18c4995898",
+      "word_count": 250
+    },
+    {
+      "chunk_id": "doc_self-attention-transformers-2023_chunk_037",
+      "document_id": "doc_self-attention-transformers-2023",
+      "document_name": "self-attention-transformers-2023.pdf",
+      "page_number": 17,
+      "sha256_normalized_text": "5ea29ab8ec99c2ba2dfa8c09ec0a87193d78ffda7f2ffb8e7cfb9fe9664a96e9",
+      "word_count": 126
+    },
+    {
+      "chunk_id": "doc_self-attention-transformers-2023_chunk_038",
+      "document_id": "doc_self-attention-transformers-2023",
+      "document_name": "self-attention-transformers-2023.pdf",
+      "page_number": 18,
+      "sha256_normalized_text": "895e0e04a2f94c800fd51536c20400e23f32533a19b5d1a8b5000aefbcca2fb2",
+      "word_count": 105
+    }
+  ],
+  "total_characters": 42380,
+  "total_chunk_characters": 48321,
+  "total_page_characters_raw": 42363
+}

@@ -332,7 +332,7 @@ Goal: create a clean Python project.
 Suggested structure:
 
 ```text
-advanced-rag/
+RAG_Chatbot/
 ├── README.md
 ├── pyproject.toml
 ├── .env.example
@@ -717,7 +717,7 @@ Keep the initial stack simple and focused.
 ## 17. Recommended Code Structure
 
 ```text
-advanced-rag/
+RAG_Chatbot/
 ├── README.md
 ├── LICENSE
 ├── pyproject.toml

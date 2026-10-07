@@ -13,6 +13,12 @@ if str(PROJECT_ROOT) not in sys.path:
 
 
 from src.rag.pipeline import PhaseOneRAG
+from src.rag.evaluation.run_metadata import (
+    build_run_metadata,
+    resolve_extraction,
+    safe_write_json,
+    serialize_chunk,
+)
 from src.rag.evaluation.retrieval_metrics import (
     mrr,
     recall_at_k,
@@ -25,6 +31,10 @@ def evaluate_questions(
     output_path: Path,
     top_k: int = 5,
     embedding_method: str = "bow",
+    extraction: str = "legacy-pypdf",
+    header_fix: bool = False,
+    metadata_enabled: bool = False,
+    force: bool = False,
 ) -> None:
     questions = json.loads(
         questions_path.read_text(
@@ -35,6 +45,8 @@ def evaluate_questions(
     rag = PhaseOneRAG(
         pdf_path,
         embedding_method=embedding_method,
+        extraction=extraction,
+        header_fix=header_fix,
     )
 
     rag.pdf_to_chunks()
@@ -59,11 +71,22 @@ def evaluate_questions(
             item.get("relevant_chunks", [])
         )
 
+        serialized_results = [
+            {
+                "chunk": serialize_chunk(
+                    result["chunk"],
+                    include_optional=metadata_enabled,
+                ),
+                "score": result["score"],
+            }
+            for result in scored_results
+        ]
+
         results.append(
             {
                 "id": item.get("id"),
                 "question": question,
-                "results": scored_results,
+                "results": serialized_results,
                 "metrics": {
                     "recall_at_1": (
                         recall_at_k(
@@ -104,22 +127,29 @@ def evaluate_questions(
             }
         )
 
-    output_path.parent.mkdir(
-        parents=True,
-        exist_ok=True,
-    )
+    metadata = None
+    if metadata_enabled:
+        metadata = build_run_metadata(
+            extraction=extraction,
+            header_fix=header_fix,
+            embedding_method=embedding_method,
+            chunk_size=250,
+            overlap=50,
+            pipeline=rag,
+            pdf_path=pdf_path,
+            question_path=questions_path,
+            top_k=top_k,
+        )
 
-    output_path.write_text(
-        json.dumps(
-            {
-                "embedding_method": embedding_method,
-                "top_k": top_k,
-                "results": results,
-            },
-            indent=2,
-            ensure_ascii=False,
-        ),
-        encoding="utf-8",
+    safe_write_json(
+        output_path,
+        {
+            "embedding_method": embedding_method,
+            "top_k": top_k,
+            "results": results,
+        },
+        metadata=metadata,
+        force=force,
     )
 
     print(
@@ -203,6 +233,22 @@ def main() -> None:
         ),
     )
 
+    parser.add_argument(
+        "--extraction",
+        choices=["legacy-pypdf", "current", "primary-only"],
+        default=None,
+    )
+
+    parser.add_argument(
+        "--header-fix",
+        action="store_true",
+    )
+
+    parser.add_argument(
+        "--force",
+        action="store_true",
+    )
+
     args = parser.parse_args()
 
     try:
@@ -213,12 +259,25 @@ def main() -> None:
     except (AttributeError, ValueError):
         pass
 
+    try:
+        extraction, metadata_enabled = resolve_extraction(
+            args.extraction,
+            args.header_fix,
+            "legacy-pypdf",
+        )
+    except ValueError as exc:
+        parser.error(str(exc))
+
     evaluate_questions(
         args.pdf,
         args.questions,
         args.output,
         args.top_k,
         args.embedding_method,
+        extraction,
+        args.header_fix,
+        metadata_enabled,
+        args.force,
     )
 
 

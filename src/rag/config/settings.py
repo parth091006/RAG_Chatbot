@@ -13,7 +13,7 @@ load_dotenv()
 class Settings:
     """Application configuration loaded from environment variables."""
 
-    app_name: str = os.getenv("APP_NAME", "advanced-rag")
+    app_name: str = os.getenv("APP_NAME", "RAG_Chatbot")
     environment: str = os.getenv("ENVIRONMENT", "development")
     log_level: str = os.getenv("LOG_LEVEL", "INFO")
 

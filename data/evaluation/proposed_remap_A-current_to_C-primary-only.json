@@ -1,0 +1,386 @@
+{
+  "from": "A-current",
+  "to": "C-primary-only",
+  "mappings": [
+    {
+      "source_chunk_id": "doc_self-attention-transformers-2023_chunk_001",
+      "target_chunk_id": "doc_self-attention-transformers-2023_chunk_001",
+      "jaccard": 1.0,
+      "containment": 1.0,
+      "second_best_target_chunk_id": "doc_self-attention-transformers-2023_chunk_002",
+      "second_best_jaccard": 0.259459,
+      "margin": 0.740541,
+      "low_confidence": false
+    },
+    {
+      "source_chunk_id": "doc_self-attention-transformers-2023_chunk_002",
+      "target_chunk_id": "doc_self-attention-transformers-2023_chunk_002",
+      "jaccard": 0.728261,
+      "containment": 0.728261,
+      "second_best_target_chunk_id": "doc_self-attention-transformers-2023_chunk_029",
+      "second_best_jaccard": 0.304348,
+      "margin": 0.423913,
+      "low_confidence": false
+    },
+    {
+      "source_chunk_id": "doc_self-attention-transformers-2023_chunk_003",
+      "target_chunk_id": "doc_self-attention-transformers-2023_chunk_003",
+      "jaccard": 1.0,
+      "containment": 1.0,
+      "second_best_target_chunk_id": "doc_self-attention-transformers-2023_chunk_009",
+      "second_best_jaccard": 0.219512,
+      "margin": 0.780488,
+      "low_confidence": false
+    },
+    {
+      "source_chunk_id": "doc_self-attention-transformers-2023_chunk_004",
+      "target_chunk_id": "doc_self-attention-transformers-2023_chunk_004",
+      "jaccard": 0.984252,
+      "containment": 0.984252,
+      "second_best_target_chunk_id": "doc_self-attention-transformers-2023_chunk_003",
+      "second_best_jaccard": 0.21327,
+      "margin": 0.770982,
+      "low_confidence": false
+    },
+    {
+      "source_chunk_id": "doc_self-attention-transformers-2023_chunk_005",
+      "target_chunk_id": "doc_self-attention-transformers-2023_chunk_005",
+      "jaccard": 1.0,
+      "containment": 1.0,
+      "second_best_target_chunk_id": "doc_self-attention-transformers-2023_chunk_006",
+      "second_best_jaccard": 0.313953,
+      "margin": 0.686047,
+      "low_confidence": false
+    },
+    {
+      "source_chunk_id": "doc_self-attention-transformers-2023_chunk_006",
+      "target_chunk_id": "doc_self-attention-transformers-2023_chunk_006",
+      "jaccard": 0.752212,
+      "containment": 0.752212,
+      "second_best_target_chunk_id": "doc_self-attention-transformers-2023_chunk_005",
+      "second_best_jaccard": 0.302564,
+      "margin": 0.449648,
+      "low_confidence": false
+    },
+    {
+      "source_chunk_id": "doc_self-attention-transformers-2023_chunk_007",
+      "target_chunk_id": "doc_self-attention-transformers-2023_chunk_007",
+      "jaccard": 1.0,
+      "containment": 1.0,
+      "second_best_target_chunk_id": "doc_self-attention-transformers-2023_chunk_008",
+      "second_best_jaccard": 0.267045,
+      "margin": 0.732955,
+      "low_confidence": false
+    },
+    {
+      "source_chunk_id": "doc_self-attention-transformers-2023_chunk_008",
+      "target_chunk_id": "doc_self-attention-transformers-2023_chunk_008",
+      "jaccard": 0.682692,
+      "containment": 0.682692,
+      "second_best_target_chunk_id": "doc_self-attention-transformers-2023_chunk_007",
+      "second_best_jaccard": 0.286432,
+      "margin": 0.39626,
+      "low_confidence": false
+    },
+    {
+      "source_chunk_id": "doc_self-attention-transformers-2023_chunk_009",
+      "target_chunk_id": "doc_self-attention-transformers-2023_chunk_009",
+      "jaccard": 1.0,
+      "containment": 1.0,
+      "second_best_target_chunk_id": "doc_self-attention-transformers-2023_chunk_010",
+      "second_best_jaccard": 0.31746,
+      "margin": 0.68254,
+      "low_confidence": false
+    },
+    {
+      "source_chunk_id": "doc_self-attention-transformers-2023_chunk_010",
+      "target_chunk_id": "doc_self-attention-transformers-2023_chunk_010",
+      "jaccard": 0.882353,
+      "containment": 0.882353,
+      "second_best_target_chunk_id": "doc_self-attention-transformers-2023_chunk_009",
+      "second_best_jaccard": 0.323077,
+      "margin": 0.559276,
+      "low_confidence": false
+    },
+    {
+      "source_chunk_id": "doc_self-attention-transformers-2023_chunk_011",
+      "target_chunk_id": "doc_self-attention-transformers-2023_chunk_011",
+      "jaccard": 1.0,
+      "containment": 1.0,
+      "second_best_target_chunk_id": "doc_self-attention-transformers-2023_chunk_012",
+      "second_best_jaccard": 0.317949,
+      "margin": 0.682051,
+      "low_confidence": false
+    },
+    {
+      "source_chunk_id": "doc_self-attention-transformers-2023_chunk_012",
+      "target_chunk_id": "doc_self-attention-transformers-2023_chunk_012",
+      "jaccard": 0.957143,
+      "containment": 0.957143,
+      "second_best_target_chunk_id": "doc_self-attention-transformers-2023_chunk_011",
+      "second_best_jaccard": 0.308458,
+      "margin": 0.648685,
+      "low_confidence": false
+    },
+    {
+      "source_chunk_id": "doc_self-attention-transformers-2023_chunk_013",
+      "target_chunk_id": "doc_self-attention-transformers-2023_chunk_013",
+      "jaccard": 1.0,
+      "containment": 1.0,
+      "second_best_target_chunk_id": "doc_self-attention-transformers-2023_chunk_014",
+      "second_best_jaccard": 0.304348,
+      "margin": 0.695652,
+      "low_confidence": false
+    },
+    {
+      "source_chunk_id": "doc_self-attention-transformers-2023_chunk_014",
+      "target_chunk_id": "doc_self-attention-transformers-2023_chunk_014",
+      "jaccard": 0.970297,
+      "containment": 0.970297,
+      "second_best_target_chunk_id": "doc_self-attention-transformers-2023_chunk_013",
+      "second_best_jaccard": 0.306452,
+      "margin": 0.663845,
+      "low_confidence": false
+    },
+    {
+      "source_chunk_id": "doc_self-attention-transformers-2023_chunk_015",
+      "target_chunk_id": "doc_self-attention-transformers-2023_chunk_015",
+      "jaccard": 1.0,
+      "containment": 1.0,
+      "second_best_target_chunk_id": "doc_self-attention-transformers-2023_chunk_016",
+      "second_best_jaccard": 0.298077,
+      "margin": 0.701923,
+      "low_confidence": false
+    },
+    {
+      "source_chunk_id": "doc_self-attention-transformers-2023_chunk_016",
+      "target_chunk_id": "doc_self-attention-transformers-2023_chunk_016",
+      "jaccard": 0.960938,
+      "containment": 0.960938,
+      "second_best_target_chunk_id": "doc_self-attention-transformers-2023_chunk_015",
+      "second_best_jaccard": 0.29108,
+      "margin": 0.669858,
+      "low_confidence": false
+    },
+    {
+      "source_chunk_id": "doc_self-attention-transformers-2023_chunk_017",
+      "target_chunk_id": "doc_self-attention-transformers-2023_chunk_017",
+      "jaccard": 1.0,
+      "containment": 1.0,
+      "second_best_target_chunk_id": "doc_self-attention-transformers-2023_chunk_018",
+      "second_best_jaccard": 0.345238,
+      "margin": 0.654762,
+      "low_confidence": false
+    },
+    {
+      "source_chunk_id": "doc_self-attention-transformers-2023_chunk_018",
+      "target_chunk_id": "doc_self-attention-transformers-2023_chunk_018",
+      "jaccard": 0.653226,
+      "containment": 0.653226,
+      "second_best_target_chunk_id": "doc_self-attention-transformers-2023_chunk_017",
+      "second_best_jaccard": 0.351759,
+      "margin": 0.301467,
+      "low_confidence": false
+    },
+    {
+      "source_chunk_id": "doc_self-attention-transformers-2023_chunk_019",
+      "target_chunk_id": "doc_self-attention-transformers-2023_chunk_019",
+      "jaccard": 1.0,
+      "containment": 1.0,
+      "second_best_target_chunk_id": "doc_self-attention-transformers-2023_chunk_020",
+      "second_best_jaccard": 0.372093,
+      "margin": 0.627907,
+      "low_confidence": false
+    },
+    {
+      "source_chunk_id": "doc_self-attention-transformers-2023_chunk_020",
+      "target_chunk_id": "doc_self-attention-transformers-2023_chunk_020",
+      "jaccard": 0.924242,
+      "containment": 0.924242,
+      "second_best_target_chunk_id": "doc_self-attention-transformers-2023_chunk_019",
+      "second_best_jaccard": 0.368421,
+      "margin": 0.555821,
+      "low_confidence": false
+    },
+    {
+      "source_chunk_id": "doc_self-attention-transformers-2023_chunk_021",
+      "target_chunk_id": "doc_self-attention-transformers-2023_chunk_021",
+      "jaccard": 1.0,
+      "containment": 1.0,
+      "second_best_target_chunk_id": "doc_self-attention-transformers-2023_chunk_022",
+      "second_best_jaccard": 0.324873,
+      "margin": 0.675127,
+      "low_confidence": false
+    },
+    {
+      "source_chunk_id": "doc_self-attention-transformers-2023_chunk_022",
+      "target_chunk_id": "doc_self-attention-transformers-2023_chunk_022",
+      "jaccard": 0.972727,
+      "containment": 0.972727,
+      "second_best_target_chunk_id": "doc_self-attention-transformers-2023_chunk_021",
+      "second_best_jaccard": 0.326633,
+      "margin": 0.646094,
+      "low_confidence": false
+    },
+    {
+      "source_chunk_id": "doc_self-attention-transformers-2023_chunk_023",
+      "target_chunk_id": "doc_self-attention-transformers-2023_chunk_023",
+      "jaccard": 1.0,
+      "containment": 1.0,
+      "second_best_target_chunk_id": "doc_self-attention-transformers-2023_chunk_024",
+      "second_best_jaccard": 0.314286,
+      "margin": 0.685714,
+      "low_confidence": false
+    },
+    {
+      "source_chunk_id": "doc_self-attention-transformers-2023_chunk_024",
+      "target_chunk_id": "doc_self-attention-transformers-2023_chunk_024",
+      "jaccard": 0.958333,
+      "containment": 0.958333,
+      "second_best_target_chunk_id": "doc_self-attention-transformers-2023_chunk_023",
+      "second_best_jaccard": 0.322034,
+      "margin": 0.636299,
+      "low_confidence": false
+    },
+    {
+      "source_chunk_id": "doc_self-attention-transformers-2023_chunk_025",
+      "target_chunk_id": "doc_self-attention-transformers-2023_chunk_025",
+      "jaccard": 1.0,
+      "containment": 1.0,
+      "second_best_target_chunk_id": "doc_self-attention-transformers-2023_chunk_026",
+      "second_best_jaccard": 0.361111,
+      "margin": 0.638889,
+      "low_confidence": false
+    },
+    {
+      "source_chunk_id": "doc_self-attention-transformers-2023_chunk_026",
+      "target_chunk_id": "doc_self-attention-transformers-2023_chunk_026",
+      "jaccard": 0.824,
+      "containment": 0.824,
+      "second_best_target_chunk_id": "doc_self-attention-transformers-2023_chunk_025",
+      "second_best_jaccard": 0.427807,
+      "margin": 0.396193,
+      "low_confidence": false
+    },
+    {
+      "source_chunk_id": "doc_self-attention-transformers-2023_chunk_027",
+      "target_chunk_id": "doc_self-attention-transformers-2023_chunk_027",
+      "jaccard": 1.0,
+      "containment": 1.0,
+      "second_best_target_chunk_id": "doc_self-attention-transformers-2023_chunk_028",
+      "second_best_jaccard": 0.241071,
+      "margin": 0.758929,
+      "low_confidence": false
+    },
+    {
+      "source_chunk_id": "doc_self-attention-transformers-2023_chunk_028",
+      "target_chunk_id": "doc_self-attention-transformers-2023_chunk_028",
+      "jaccard": 0.977273,
+      "containment": 0.977273,
+      "second_best_target_chunk_id": "doc_self-attention-transformers-2023_chunk_027",
+      "second_best_jaccard": 0.243363,
+      "margin": 0.73391,
+      "low_confidence": false
+    },
+    {
+      "source_chunk_id": "doc_self-attention-transformers-2023_chunk_029",
+      "target_chunk_id": "doc_self-attention-transformers-2023_chunk_029",
+      "jaccard": 0.8,
+      "containment": 0.8,
+      "second_best_target_chunk_id": "doc_self-attention-transformers-2023_chunk_025",
+      "second_best_jaccard": 0.164474,
+      "margin": 0.635526,
+      "low_confidence": false
+    },
+    {
+      "source_chunk_id": "doc_self-attention-transformers-2023_chunk_030",
+      "target_chunk_id": "doc_self-attention-transformers-2023_chunk_030",
+      "jaccard": 1.0,
+      "containment": 1.0,
+      "second_best_target_chunk_id": "doc_self-attention-transformers-2023_chunk_031",
+      "second_best_jaccard": 0.29368,
+      "margin": 0.70632,
+      "low_confidence": false
+    },
+    {
+      "source_chunk_id": "doc_self-attention-transformers-2023_chunk_031",
+      "target_chunk_id": "doc_self-attention-transformers-2023_chunk_031",
+      "jaccard": 1.0,
+      "containment": 1.0,
+      "second_best_target_chunk_id": "doc_self-attention-transformers-2023_chunk_030",
+      "second_best_jaccard": 0.29368,
+      "margin": 0.70632,
+      "low_confidence": false
+    },
+    {
+      "source_chunk_id": "doc_self-attention-transformers-2023_chunk_032",
+      "target_chunk_id": "doc_self-attention-transformers-2023_chunk_032",
+      "jaccard": 0.981481,
+      "containment": 0.981481,
+      "second_best_target_chunk_id": "doc_self-attention-transformers-2023_chunk_031",
+      "second_best_jaccard": 0.285068,
+      "margin": 0.696414,
+      "low_confidence": false
+    },
+    {
+      "source_chunk_id": "doc_self-attention-transformers-2023_chunk_033",
+      "target_chunk_id": "doc_self-attention-transformers-2023_chunk_033",
+      "jaccard": 1.0,
+      "containment": 1.0,
+      "second_best_target_chunk_id": "doc_self-attention-transformers-2023_chunk_034",
+      "second_best_jaccard": 0.190283,
+      "margin": 0.809717,
+      "low_confidence": false
+    },
+    {
+      "source_chunk_id": "doc_self-attention-transformers-2023_chunk_034",
+      "target_chunk_id": "doc_self-attention-transformers-2023_chunk_034",
+      "jaccard": 1.0,
+      "containment": 1.0,
+      "second_best_target_chunk_id": "doc_self-attention-transformers-2023_chunk_035",
+      "second_best_jaccard": 0.217573,
+      "margin": 0.782427,
+      "low_confidence": false
+    },
+    {
+      "source_chunk_id": "doc_self-attention-transformers-2023_chunk_035",
+      "target_chunk_id": "doc_self-attention-transformers-2023_chunk_035",
+      "jaccard": 1.0,
+      "containment": 1.0,
+      "second_best_target_chunk_id": "doc_self-attention-transformers-2023_chunk_034",
+      "second_best_jaccard": 0.217573,
+      "margin": 0.782427,
+      "low_confidence": false
+    },
+    {
+      "source_chunk_id": "doc_self-attention-transformers-2023_chunk_036",
+      "target_chunk_id": "doc_self-attention-transformers-2023_chunk_036",
+      "jaccard": 1.0,
+      "containment": 1.0,
+      "second_best_target_chunk_id": "doc_self-attention-transformers-2023_chunk_037",
+      "second_best_jaccard": 0.226667,
+      "margin": 0.773333,
+      "low_confidence": false
+    },
+    {
+      "source_chunk_id": "doc_self-attention-transformers-2023_chunk_037",
+      "target_chunk_id": "doc_self-attention-transformers-2023_chunk_037",
+      "jaccard": 0.92,
+      "containment": 0.92,
+      "second_best_target_chunk_id": "doc_self-attention-transformers-2023_chunk_036",
+      "second_best_jaccard": 0.220779,
+      "margin": 0.699221,
+      "low_confidence": false
+    },
+    {
+      "source_chunk_id": "doc_self-attention-transformers-2023_chunk_038",
+      "target_chunk_id": "doc_self-attention-transformers-2023_chunk_038",
+      "jaccard": 0.956522,
+      "containment": 0.956522,
+      "second_best_target_chunk_id": "doc_self-attention-transformers-2023_chunk_028",
+      "second_best_jaccard": 0.171598,
+      "margin": 0.784924,
+      "low_confidence": false
+    }
+  ]
+}

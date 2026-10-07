@@ -1,0 +1,211 @@
+RAG RETRIEVAL REPRESENTATION EXPERIMENT PLAN
+============================================
+
+Status
+------
+Inspection complete. No code changes have been made for this experiment.
+
+Experiment question
+-------------------
+Does removing secondary/diagram layout content from the retrieval representation
+improve generation quality without damaging retrieval quality?
+
+Current findings
+----------------
+1. src/rag/ingestion/parser.py uses PyMuPDF block coordinates.
+2. Repeated headers and footers are removed.
+3. Blocks are split at the page midpoint into left and right regions.
+4. A layout score based on text length, width, and text density identifies the
+   primary region. The other region is secondary content.
+5. The current parser returns primary blocks followed by secondary blocks.
+6. This is geometric classification, not semantic diagram detection. A real
+   two-column text page could be classified incorrectly.
+
+Important baseline mismatch
+---------------------------
+The desired baseline is:
+
+PDF -> current layout-aware extraction -> 250/50 chunking -> TF-IDF ->
+top-10 retrieval -> cross-encoder reranking -> top-5 -> current generator
+
+However, src/rag/pipeline.py currently loads pages with pypdf directly. The
+reranking and generation evaluation scripts use PhaseOneRAG, so they currently
+do not exercise parser.py's layout-aware extraction.
+
+A read-only comparison showed:
+
+- pypdf extraction: 18 pages, 38 chunks, 42,380 characters
+- layout-aware extraction: 18 pages, 38 chunks, 40,951 characters
+
+The contents differ even though the page and chunk counts are currently equal.
+The pypdf path contains repeated header text and diagram content that the
+layout-aware parser removes or reorders.
+
+Existing generation behavior
+----------------------------
+The saved reranked generation results show:
+
+- q003: diagram labels appear in the answer.
+- q004: the answer is mostly Transformer diagram text.
+- q006: the answer includes unrelated scaling/equation content.
+- q010: repeated header text appears in the answer.
+
+The current generator is deterministic and extractive. It is not an LLM yet.
+It selects up to three sentences using lexical overlap and context priority.
+
+The current lexical faithfulness metric is not sufficient by itself. A score of
+1.0 only means that every normalized answer term appears somewhere in the
+retrieved evidence. A noisy answer copied from noisy evidence can still score
+1.0.
+
+Ground-truth risk
+-----------------
+Chunk IDs are position-based, for example:
+
+doc_self-attention-transformers-2023_chunk_018
+
+If primary-only extraction changes chunk boundaries or counts, existing
+relevant_chunks labels may no longer refer to the same evidence.
+
+Also, these files are not fully consistent:
+
+- data/evaluation/retrieval_questions.json
+- data/evaluation/retrieval_questions_ground_truth.json
+
+The current reranker scripts default to retrieval_questions.json. That file
+should remain the canonical question file unless explicitly changed.
+
+Proposed minimal implementation
+-------------------------------
+First align the actual baseline with the stated baseline:
+
+1. Add an include_secondary option to parser.py.
+   - Default: True.
+   - False: return primary blocks only.
+
+2. Update PhaseOneRAG to use extract_pages_from_pdf().
+   - Default behavior remains primary plus secondary content.
+   - Add an explicit representation option for baseline versus primary-only.
+
+3. Add the same representation option to:
+   - scripts/inspect_chunks.py
+   - scripts/evaluate_retrieval.py
+   - scripts/evaluate_reranker.py
+   - scripts/evaluate_reranked_generation.py
+
+4. Keep baseline defaults unchanged and write experiment results to separate
+   output files.
+
+No ground-truth file should be changed automatically.
+
+Variables that remain unchanged
+--------------------------------
+Both runs must use the same:
+
+- PDF
+- block cleaning logic
+- chunk size: 250 words
+- overlap: 50 words
+- TF-IDF implementation
+- candidate retrieval size: top-10
+- cross-encoder model
+- reranked context count: top-5
+- deterministic generator
+- question file
+- evaluation metrics
+
+The only intended variable is:
+
+include secondary blocks: True -> False
+
+Success criteria
+----------------
+The primary-only representation is useful if it:
+
+1. Reduces diagram and repeated-header noise.
+2. Preserves or approximately preserves Recall@1, Recall@3, Recall@5,
+   and MRR.
+3. Does not reduce the usefulness of reranking.
+4. Produces cleaner answers for q003, q004, q006, and q010.
+5. Improves observed answer relevance or answer quality.
+6. Is judged using actual chunks and answers, not aggregate metrics alone.
+
+Commands after approval
+-----------------------
+Generate baseline chunks:
+
+python scripts/inspect_chunks.py data/raw/self-attention-transformers-2023.pdf --start 1 --end 38 --representation current
+
+Run baseline TF-IDF retrieval:
+
+python scripts/evaluate_retrieval.py --representation current --output data/evaluation/retrieval_results_layout_baseline.json
+
+Run baseline reranking:
+
+python scripts/evaluate_reranker.py --representation current --output data/evaluation/reranker_results_layout_baseline.json
+
+Run baseline generation:
+
+python scripts/evaluate_reranked_generation.py --representation current --output data/evaluation/reranked_generation_layout_baseline.json
+
+Generate primary-only chunks:
+
+python scripts/inspect_chunks.py data/raw/self-attention-transformers-2023.pdf --start 1 --end 38 --representation primary-only
+
+Run primary-only TF-IDF retrieval:
+
+python scripts/evaluate_retrieval.py --representation primary-only --output data/evaluation/retrieval_results_primary_only.json
+
+Run primary-only reranking:
+
+python scripts/evaluate_reranker.py --representation primary-only --output data/evaluation/reranker_results_primary_only.json
+
+Run primary-only generation:
+
+python scripts/evaluate_reranked_generation.py --representation primary-only --output data/evaluation/reranked_generation_primary_only.json
+
+Comparison report format
+------------------------
+BASELINE
+- retrieval metrics
+- reranking metrics
+- generation metrics
+- observed chunk and answer behavior
+
+EXPERIMENT
+- retrieval metrics
+- reranking metrics
+- generation metrics
+- observed chunk and answer behavior
+
+CHANGE
+- what improved
+- what worsened
+- what stayed stable
+
+CONCLUSION
+- accept, reject, or inconclusive
+
+NEXT HYPOTHESIS
+- exactly one next step
+
+PHASE 6 BLINDED ANSWER REVIEW PLAN
+==================================
+
+Do not run this phase until explicitly approved.
+
+After generating the A, B, and C evaluation outputs, create:
+
+docs/experiments/blinded_answer_review.md
+
+For each of the ten canonical questions:
+
+- Present the A, B, and C answers in a deterministic shuffled order.
+- Label the shuffled answers X, Y, and Z.
+- Use a fixed random seed so the order is reproducible.
+- Include these fields for manual review:
+   - answers the question (0/1/2)
+   - noise (0/1/2)
+
+Write the mapping from X/Y/Z back to A/B/C to a separate protected file so
+the reviewer-facing document remains blinded.

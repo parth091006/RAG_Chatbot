@@ -13,6 +13,7 @@ if str(PROJECT_ROOT) not in sys.path:
 
 
 from src.rag.pipeline import PhaseOneRAG
+from src.rag.evaluation.run_metadata import serialize_chunk
 from src.rag.retrieval.hybrid import HybridRetriever
 from src.rag.evaluation.retrieval_metrics import mrr, recall_at_k
 
@@ -109,7 +110,10 @@ def evaluate_questions(
         for index, score in hybrid_hits:
             question_result["results"].append(
                 {
-                    "chunk": chunks[index],
+                    "chunk": serialize_chunk(
+                        chunks[index],
+                        include_optional=False,
+                    ),
                     "score": float(score),
                 }
             )

@@ -1,11 +1,11 @@
 services:
   rag-api:
     build: .
-    container_name: advanced-rag-api
+    container_name: rag-chatbot-api
     ports:
       - "8000:8000"
     environment:
-      APP_NAME: advanced-rag
+      APP_NAME: RAG_Chatbot
       ENVIRONMENT: development
       API_HOST: 0.0.0.0
       API_PORT: 8000

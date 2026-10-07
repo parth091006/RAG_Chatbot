@@ -16,6 +16,22 @@ from src.rag.evaluation.generation_metrics import (
     answer_relevance_score,
     faithfulness_score,
 )
+from src.rag.evaluation.run_metadata import (
+    build_run_metadata,
+    resolve_extraction,
+    safe_write_json,
+)
+from src.rag.evaluation.noise_metrics import (
+    answer_evidence_support,
+    answer_header_leak,
+    answer_secondary_ratio,
+    answer_unlocatable_sentence_count,
+    context_noise_per_chunk,
+    diagram_noise_ratio,
+    header_leak_counts,
+    document_label_like_stats,
+    label_like_char_share,
+)
 from src.rag.pipeline import PhaseOneRAG
 from src.rag.retrieval.reranker import Reranker
 
@@ -27,6 +43,10 @@ def evaluate_questions(
     candidate_k: int = 10,
     top_k: int = 5,
     reranker_model: str = "cross-encoder/ms-marco-MiniLM-L-6-v2",
+    extraction: str = "legacy-pypdf",
+    header_fix: bool = False,
+    metadata_enabled: bool = False,
+    force: bool = False,
 ) -> None:
     """Evaluate generation using TF-IDF retrieval followed by reranking."""
 
@@ -38,6 +58,8 @@ def evaluate_questions(
     rag = PhaseOneRAG(
         pdf_path,
         embedding_method="tfidf",
+        extraction=extraction,
+        header_fix=header_fix,
     )
 
     # Keep the canonical Phase-1 chunking configuration.
@@ -53,6 +75,8 @@ def evaluate_questions(
         model_name=reranker_model,
         top_k=top_k,
     )
+
+    label_stats = document_label_like_stats(chunks)
 
     results = []
 
@@ -138,20 +162,70 @@ def evaluate_questions(
             },
         }
 
+        if metadata_enabled:
+            context_chunks = [
+                chunks[index]
+                for index, _ in reranked_results
+            ]
+            result["noise_diagnostics"] = {
+                "header_leak": header_leak_counts(
+                    context_chunks
+                ),
+                "diagram_noise_ratio": diagram_noise_ratio(
+                    context_chunks
+                ),
+                "context_noise_per_chunk": context_noise_per_chunk(
+                    context_chunks
+                ),
+                "answer_secondary_ratio": answer_secondary_ratio(
+                    answer,
+                    context_chunks,
+                ),
+                "answer_header_leak": answer_header_leak(
+                    answer,
+                    context_chunks,
+                ),
+                "answer_unlocatable_sentence_count": (
+                    answer_unlocatable_sentence_count(
+                        answer,
+                        context_chunks,
+                    )
+                ),
+                "answer_evidence_support": answer_evidence_support(
+                    answer,
+                    context_chunks,
+                ),
+                "label_like_char_share": label_like_char_share(
+                    answer,
+                    context_chunks,
+                ),
+                "label_like_threshold": label_stats["threshold"],
+                "label_like_document_stats": label_stats,
+            }
+
         results.append(result)
 
-    output_path.parent.mkdir(
-        parents=True,
-        exist_ok=True,
-    )
+    metadata = None
+    if metadata_enabled:
+        metadata = build_run_metadata(
+            extraction=extraction,
+            header_fix=header_fix,
+            embedding_method="tfidf",
+            chunk_size=250,
+            overlap=50,
+            pipeline=rag,
+            pdf_path=pdf_path,
+            question_path=questions_path,
+            candidate_k=candidate_k,
+            top_k=top_k,
+            reranker_model=reranker_model,
+        )
 
-    output_path.write_text(
-        json.dumps(
-            results,
-            indent=2,
-            ensure_ascii=False,
-        ),
-        encoding="utf-8",
+    safe_write_json(
+        output_path,
+        results,
+        metadata=metadata,
+        force=force,
     )
 
     # -------------------------------------------------------------
@@ -222,6 +296,53 @@ def evaluate_questions(
         print(
             f"Average relevance   : "
             f"{avg_relevance:.4f}"
+        )
+
+    if metadata_enabled and results:
+        diagnostics = [
+            result["noise_diagnostics"]
+            for result in results
+        ]
+        answer_ratios = [
+            item["answer_secondary_ratio"]
+            for item in diagnostics
+            if item["answer_secondary_ratio"] is not None
+        ]
+        context_means = [
+            item["context_noise_per_chunk"]["mean"]
+            for item in diagnostics
+            if item["context_noise_per_chunk"]["mean"] is not None
+        ]
+        evidence_support = [
+            item["answer_evidence_support"]
+            for item in diagnostics
+        ]
+        label_shares = [
+            item["label_like_char_share"]
+            for item in diagnostics
+        ]
+        print("\n" + "=" * 60)
+        print("NOISE DIAGNOSTICS SUMMARY")
+        print("=" * 60)
+        print(
+            "Average diagram noise ratio: "
+            f"{sum(item['diagram_noise_ratio'] for item in diagnostics if item['diagram_noise_ratio'] is not None) / max(sum(item['diagram_noise_ratio'] is not None for item in diagnostics), 1):.4f}"
+        )
+        print(
+            "Average context secondary ratio: "
+            f"{sum(context_means) / len(context_means) if context_means else None}"
+        )
+        print(
+            "Average answer secondary ratio: "
+            f"{sum(answer_ratios) / len(answer_ratios) if answer_ratios else None}"
+        )
+        print(
+            "Average answer evidence support: "
+            f"{sum(evidence_support) / len(evidence_support):.4f}"
+        )
+        print(
+            "Average label-like character share: "
+            f"{sum(label_shares) / len(label_shares):.4f}"
         )
 
     print(
@@ -296,6 +417,22 @@ def main() -> None:
         default="cross-encoder/ms-marco-MiniLM-L-6-v2",
     )
 
+    parser.add_argument(
+        "--extraction",
+        choices=["legacy-pypdf", "current", "primary-only"],
+        default=None,
+    )
+
+    parser.add_argument(
+        "--header-fix",
+        action="store_true",
+    )
+
+    parser.add_argument(
+        "--force",
+        action="store_true",
+    )
+
     args = parser.parse_args()
 
     if args.candidate_k <= 0:
@@ -313,6 +450,15 @@ def main() -> None:
             "--top-k cannot be greater than --candidate-k."
         )
 
+    try:
+        extraction, metadata_enabled = resolve_extraction(
+            args.extraction,
+            args.header_fix,
+            "legacy-pypdf",
+        )
+    except ValueError as exc:
+        parser.error(str(exc))
+
     evaluate_questions(
         pdf_path=args.pdf,
         questions_path=args.questions,
@@ -320,6 +466,10 @@ def main() -> None:
         candidate_k=args.candidate_k,
         top_k=args.top_k,
         reranker_model=args.reranker_model,
+        extraction=extraction,
+        header_fix=args.header_fix,
+        metadata_enabled=metadata_enabled,
+        force=args.force,
     )
 
 

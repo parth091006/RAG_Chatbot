@@ -1,5 +1,5 @@
 [project]
-name = "advanced-rag"
+name = "rag-chatbot"
 version = "0.1.0"
 description = "Advanced Retrieval-Augmented Generation Research Assistant"
 readme = "README.md"

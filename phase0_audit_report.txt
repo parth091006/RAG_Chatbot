@@ -1,0 +1,493 @@
+PHASE 0 AUDIT REPORT
+====================
+
+Project: Advanced RAG Research Assistant
+Date: 2026-10-07
+Status: Read-only audit complete
+
+No source code, question files, or ground-truth files were modified during
+this audit.
+
+
+1. REPOSITORY STRUCTURE
+=======================
+
+Relevant project structure:
+
+RAG_Chatbot/
+├── data/
+│   ├── raw/
+│   ├── processed/
+│   └── evaluation/
+├── scripts/
+├── src/
+│   └── rag/
+│       ├── api/
+│       ├── chunking/
+│       ├── citations/
+│       ├── comparison/
+│       ├── config/
+│       ├── embeddings/
+│       ├── evaluation/
+│       ├── generation/
+│       ├── ingestion/
+│       ├── retrieval/
+│       └── pipeline.py
+├── tests/
+├── pyproject.toml
+└── README.md
+
+Generated directories also present:
+
+- .venv/
+- .pytest_cache/
+- __pycache__/
+- advanced_rag.egg-info/
+- src/advanced_rag.egg-info/
+
+
+2. IMPLEMENTATION AUDIT
+=======================
+
+2.1 Parser
+----------
+File: src/rag/ingestion/parser.py
+
+The parser:
+
+- Uses PyMuPDF block extraction.
+- Removes selected repeated headers and footers.
+- Splits blocks at the page midpoint.
+- Creates left and right block regions.
+- Scores regions using text length, width, and text density.
+- Treats the higher-scoring region as primary.
+- Treats the other region as secondary.
+- Returns primary blocks followed by secondary blocks.
+
+The parser does not semantically identify diagrams. It uses geometric
+classification. A genuine two-column text page could therefore have one text
+column classified as secondary content.
+
+2.2 Pipeline
+------------
+File: src/rag/pipeline.py
+
+PhaseOneRAG currently loads pages with pypdf directly. It does not call the
+layout-aware parser in src/rag/ingestion/parser.py.
+
+The pipeline:
+
+- Supports bow, tfidf, and semantic representations.
+- Uses fixed 250-word chunks with 50-word overlap by default.
+- Uses DenseRetriever over the selected representation.
+- Uses the deterministic generator.
+- Does not use cross-encoder reranking inside answer_question().
+
+The stated TF-IDF -> top-10 -> cross-encoder -> top-5 flow is implemented by
+the dedicated reranking scripts, not by PhaseOneRAG globally.
+
+2.3 Chunking
+------------
+File: src/rag/chunking/chunker.py
+
+The current baseline uses fixed-size page-aware chunks:
+
+- chunk size: 250 words
+- overlap: 50 words
+
+Chunk IDs are position-based:
+
+doc_self-attention-transformers-2023_chunk_018
+
+Both chunk_pages() and section_aware_chunks() generate chunk IDs using the
+same sequential numbering pattern.
+
+2.4 Retrieval
+-------------
+Files:
+
+- src/rag/retrieval/dense.py
+- src/rag/retrieval/sparse.py
+- src/rag/retrieval/hybrid.py
+- src/rag/embeddings/embedder.py
+
+Dense retrieval uses cosine similarity.
+
+Sparse retrieval uses a local BM25 implementation.
+
+Hybrid retrieval combines dense and BM25 rankings with Reciprocal Rank Fusion.
+
+Embedder supports:
+
+- bow
+- tfidf
+- semantic sentence-transformer embeddings
+
+2.5 Reranking
+-------------
+File: src/rag/retrieval/reranker.py
+
+The default reranker is:
+
+cross-encoder/ms-marco-MiniLM-L-6-v2
+
+It receives candidate document texts and returns the highest-scoring top-k
+candidate indexes.
+
+2.6 Generation
+--------------
+File: src/rag/generation/generator.py
+
+The current generator is deterministic and extractive. It is not an LLM.
+
+It selects up to three sentences using:
+
+- question-term overlap
+- question-term coverage
+- context priority
+- duplicate suppression
+
+The prompt interface exists for future compatibility, but the prompt is not
+sent to an external model.
+
+
+3. EXTRACTION COMPARISON
+========================
+
+Input PDF:
+
+data/raw/self-attention-transformers-2023.pdf
+
+Read-only comparison at 250-word chunks and 50-word overlap:
+
+Representation       Pages   Chunks   Characters
+------------------------------------------------
+pypdf                 18      38       42,380
+layout-aware parser   18      38       40,951
+
+The page and chunk counts are currently identical, but the content differs.
+The pypdf representation contains repeated header text and diagram content
+that the layout-aware parser removes or reorders.
+
+
+4. CLI SCRIPT INVENTORY
+=======================
+
+compare_pdf_extractors.py
+--------------------------
+Arguments:
+
+- positional pdf_path
+
+Purpose: compare PyPDF and raw PyMuPDF extraction previews.
+
+inspect_pdf_blocks.py
+---------------------
+Arguments:
+
+- positional pdf_path
+
+Purpose: print raw PyMuPDF block coordinates and text.
+
+inspect_chunks.py
+-----------------
+Arguments:
+
+- positional pdf_path
+- --chunk-size, default 250
+- --overlap, default 50
+- --start, default 1
+- --end, default 50
+
+Purpose: inspect layout-aware chunks.
+
+Important: this script uses parser.py directly, unlike PhaseOneRAG-based
+evaluation scripts.
+
+evaluate_retrieval.py
+---------------------
+Arguments:
+
+- --pdf
+- --questions
+- --output
+- --top-k, default 5
+- --embedding-method, choices: bow, tfidf, semantic; default bow
+
+Defaults:
+
+- questions: data/evaluation/retrieval_questions.json
+- output: data/evaluation/retrieval_results.json
+- PDF: data/raw/self-attention-transformers-2023.pdf
+
+Important: default retrieval representation is bow, not tfidf.
+
+evaluate_generation.py
+----------------------
+Arguments:
+
+- --pdf
+- --questions
+- --output
+- --top-k, default 5
+
+Defaults:
+
+- questions: data/evaluation/retrieval_questions.json
+- output: data/evaluation/generation_results.json
+
+Uses TF-IDF internally but does not use cross-encoder reranking.
+
+evaluate_hybrid_retrieval.py
+----------------------------
+Arguments:
+
+- --pdf
+- --questions
+- --output
+- --top-k, default 5
+
+Defaults:
+
+- questions: data/evaluation/retrieval_questions.json
+- output: data/evaluation/hybrid_retrieval_results.json
+
+Uses semantic embeddings plus BM25 and Reciprocal Rank Fusion.
+
+evaluate_reranker.py
+--------------------
+Arguments:
+
+- --pdf
+- --questions
+- --output
+- --candidate-k, default 10
+- --top-k, default 5
+- --reranker-model, default cross-encoder/ms-marco-MiniLM-L-6-v2
+
+Defaults:
+
+- questions: data/evaluation/retrieval_questions.json
+- output: data/evaluation/reranker_results.json
+
+Uses TF-IDF retrieval, top-10 candidate retrieval, cross-encoder reranking,
+and final top-5 results.
+
+evaluate_reranked_generation.py
+--------------------------------
+Arguments:
+
+- --pdf
+- --questions
+- --output
+- --candidate-k, default 10
+- --top-k, default 5
+- --reranker-model, default cross-encoder/ms-marco-MiniLM-L-6-v2
+
+Defaults:
+
+- questions: data/evaluation/retrieval_questions.json
+- output: data/evaluation/reranked_generation_results.json
+
+Uses TF-IDF retrieval, top-10 candidate retrieval, cross-encoder reranking,
+top-5 contexts, and the deterministic generator.
+
+run_chunking_experiment.py
+---------------------------
+Arguments:
+
+- --pdf
+- --questions
+- --output
+
+Defaults:
+
+- questions: data/evaluation/retrieval_questions.json
+- output: data/evaluation/chunking_experiment_results.json
+
+Compares the current baseline, smaller chunks, and section-aware chunks.
+
+
+5. EVALUATION JSON DIFF
+=======================
+
+Compared files:
+
+- data/evaluation/retrieval_questions.json
+- data/evaluation/retrieval_questions_ground_truth.json
+
+Question IDs:
+
+- No question exists only in retrieval_questions.json.
+- No question exists only in retrieval_questions_ground_truth.json.
+- Both files contain the same ten question IDs.
+
+Question text:
+
+- No question text differences were found.
+
+Relevant chunk differences:
+
+q001
+----
+retrieval_questions.json:
+- doc_self-attention-transformers-2023_chunk_008
+- doc_self-attention-transformers-2023_chunk_009
+- doc_self-attention-transformers-2023_chunk_010
+
+ground_truth file:
+- doc_self-attention-transformers-2023_chunk_007
+- doc_self-attention-transformers-2023_chunk_008
+- doc_self-attention-transformers-2023_chunk_009
+
+q004
+----
+retrieval_questions.json:
+- doc_self-attention-transformers-2023_chunk_017
+- doc_self-attention-transformers-2023_chunk_018
+- doc_self-attention-transformers-2023_chunk_019
+
+ground_truth file:
+- doc_self-attention-transformers-2023_chunk_018
+- doc_self-attention-transformers-2023_chunk_019
+- doc_self-attention-transformers-2023_chunk_021
+
+q008
+----
+retrieval_questions.json:
+- doc_self-attention-transformers-2023_chunk_026
+
+ground_truth file:
+- doc_self-attention-transformers-2023_chunk_025
+- doc_self-attention-transformers-2023_chunk_026
+
+q010
+-----
+retrieval_questions.json:
+- doc_self-attention-transformers-2023_chunk_006
+- doc_self-attention-transformers-2023_chunk_007
+- doc_self-attention-transformers-2023_chunk_008
+
+ground_truth file:
+- doc_self-attention-transformers-2023_chunk_005
+- doc_self-attention-transformers-2023_chunk_006
+- doc_self-attention-transformers-2023_chunk_007
+
+No evaluation question or ground-truth file was changed.
+
+The canonical question file used by the evaluation scripts is:
+
+data/evaluation/retrieval_questions.json
+
+
+6. CHUNK-ID CREATION AND CONSUMPTION
+====================================
+
+Chunk IDs are generated in:
+
+- src/rag/chunking/chunker.py: chunk_pages()
+- src/rag/chunking/chunker.py: section_aware_chunks()
+
+Chunk IDs are consumed in source code by:
+
+- src/rag/generation/generator.py
+- src/rag/citations/citation_manager.py
+
+Chunk IDs are consumed by scripts:
+
+- scripts/evaluate_retrieval.py
+- scripts/evaluate_generation.py
+- scripts/evaluate_hybrid_retrieval.py
+- scripts/evaluate_reranker.py
+- scripts/evaluate_reranked_generation.py
+- scripts/inspect_chunks.py
+- scripts/run_chunking_experiment.py
+
+Chunk IDs are asserted or used in tests:
+
+- tests/test_phase1_pipeline.py
+- tests/test_generator.py
+- tests/test_citations.py
+- tests/test_retrieval_metrics.py
+
+Chunk IDs are also stored in retrieval question files and generated result
+JSON files.
+
+Because IDs are positional, changing extraction can change chunk boundaries
+and silently invalidate relevant_chunks labels.
+
+
+7. SAVED GENERATION BEHAVIOR
+============================
+
+Existing reranked generation results show noise in these questions:
+
+q003
+----
+Diagram labels appear in the generated answer.
+
+q004
+----
+The answer is mostly Transformer diagram text.
+
+q006
+----
+The answer includes unrelated scaling and equation content.
+
+q010
+-----
+Repeated header text appears in the answer.
+
+The lexical faithfulness metric is weak. A score of 1.0 only means every
+normalized answer term appears somewhere in the evidence. A noisy answer
+copied from noisy evidence can still receive a score of 1.0.
+
+
+8. TEST BASELINE
+================
+
+Command:
+
+.\.venv\Scripts\python.exe -m pytest -q
+
+Result:
+
+17 passed
+
+
+9. ADDITIONAL DISCREPANCY
+=========================
+
+File: scripts/inspect_pdf_blocks.py
+
+This script is currently syntactically invalid because executable code appears
+before:
+
+from __future__ import annotations
+
+Python requires future imports to appear at the beginning of the file.
+
+The script was not modified because it is unrelated to the requested retrieval
+representation experiment.
+
+
+10. FINAL AUDIT CONCLUSION
+==========================
+
+The project state is mostly as described, with these corrections:
+
+1. PhaseOneRAG uses pypdf, not the layout-aware parser.
+2. Only the reranker evaluation scripts implement the requested TF-IDF,
+   top-10, cross-encoder, top-5 flow.
+3. evaluate_retrieval.py defaults to BoW, not TF-IDF.
+4. The two question files differ in four relevant_chunks entries.
+5. Chunk IDs are position-based and can become invalid after extraction changes.
+6. inspect_pdf_blocks.py has a pre-existing syntax error.
+7. The current test baseline is healthy: 17 tests passed.
+
+Recommended next phase boundary:
+
+First make the actual baseline use the layout-aware parser while preserving
+primary-plus-secondary content by default. Then add an explicit primary-only
+representation option. Keep all experiment outputs in new files and do not
+modify either question or ground-truth JSON file automatically.
