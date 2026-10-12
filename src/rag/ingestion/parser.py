@@ -350,54 +350,78 @@ def _is_repeated_header_or_footer(
     y1: float,
     strip_page_number_headers: bool = False,
 ) -> bool:
-    """Remove obvious repeated page-level header/footer content."""
+    """Remove obvious repeated page-level header/footer content.
+
+    Uses generic heuristics that work across any PDF:
+    - Standalone page numbers at top or bottom margins
+    - Short text blocks (≤ 60 chars) in the top 10% that look like
+      running headers (title fragments, draft markers)
+    - Short text blocks in the bottom 10% that look like running footers
+    """
     normalized = " ".join(
         text.lower().split()
     )
 
-    if (
-        y0 < page_height * 0.10
-        and normalized.startswith(
-            "[draft] note 10:"
-        )
-    ):
-        return True
+    is_top = y0 < page_height * 0.10
+    is_bottom = y1 > page_height * 0.90
 
-    if (
-        y0 < page_height * 0.10
-        and (
-            normalized == "with deep learning"
-            or (
-                strip_page_number_headers
-                and re.fullmatch(
-                    r"with deep learning \d{1,3}",
-                    normalized,
-                )
-                is not None
-            )
-        )
-    ):
-        return True
-
+    # Standalone page numbers at top or bottom
     if (
         len(normalized) <= 4
         and normalized.isdigit()
-        and (
-            y1 > page_height * 0.90
-            or y0 < page_height * 0.10
-        )
+        and (is_top or is_bottom)
     ):
         return True
+
+    # Strip page-number headers: short text ending with a number at top
+    if (
+        strip_page_number_headers
+        and is_top
+        and len(normalized) <= 60
+        and re.search(r"\d{1,4}$", normalized)
+    ):
+        return True
+
+    # Draft markers at top of page
+    if is_top and normalized.startswith("[draft]"):
+        return True
+
+    # Very short repeated header/footer text (≤ 40 chars, non-heading)
+    if (
+        (is_top or is_bottom)
+        and len(normalized) <= 40
+        and not re.match(r"\d+(\.\d+)*\s+[A-Z]", text.strip())
+        and len(normalized.split()) <= 6
+    ):
+        # Only strip if it doesn't look like a section heading
+        word_count = len(normalized.split())
+        if word_count <= 4 and not any(
+            c.isdigit() and i == 0 for i, c in enumerate(normalized)
+        ):
+            return True
 
     return False
 
 
 def _is_header_like_block(text: str) -> bool:
+    """Detect blocks that look like running page headers.
+
+    Uses generic patterns: short all-caps text, short text with
+    trailing page numbers, or common academic running header formats.
+    """
     normalized = " ".join(text.casefold().split())
-    return re.fullmatch(
-        r"with deep learning(?: \d{1,3})?",
-        normalized,
-    ) is not None
+    word_count = len(normalized.split())
+
+    # Very short text that is likely a running header
+    if word_count <= 5 and len(normalized) <= 50:
+        # All-caps short text
+        if text.strip().isupper():
+            return True
+        # Short text ending with a page number
+        if re.fullmatch(r".{3,40}\s+\d{1,3}", normalized):
+            return True
+
+    return False
 
 
 def main() -> None:

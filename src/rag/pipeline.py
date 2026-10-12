@@ -3,7 +3,15 @@ from __future__ import annotations
 from pathlib import Path
 from typing import Any
 
-from .chunking.chunker import Chunk, chunk_pages, section_aware_chunks
+from .chunking.chunker import (
+    Chunk,
+    chunk_pages,
+    compute_chunk_quality,
+    deduplicate_chunk_records,
+    recursive_page_chunks,
+    section_aware_chunks,
+    semantic_page_chunks,
+)
 from .embeddings.embedder import Embedder
 from .generation.generator import Generator
 from .ingestion.parser import (
@@ -87,17 +95,25 @@ class PhaseOneRAG:
         strategy: str = "fixed",
         chunk_size: int = 250,
         overlap: int = 50,
+        cross_page_merge: bool = False,
+        deduplicate: bool = False,
     ) -> list[Chunk]:
         """Convert the configured PDF into retrieval chunks.
 
         Args:
             strategy:
-                ``"fixed"`` for the baseline fixed-size chunking strategy or
-                ``"section"`` for section-aware chunking.
+                ``"fixed"`` for baseline fixed-size chunking,
+                ``"section"`` for section-aware chunking,
+                ``"recursive"`` for hierarchical recursive splitting, or
+                ``"semantic"`` for topic-shift-aware chunking.
             chunk_size:
                 Maximum number of words per chunk.
             overlap:
                 Number of overlapping words between consecutive chunks.
+            cross_page_merge:
+                Merge text across page boundaries when sentences span pages.
+            deduplicate:
+                Remove near-duplicate chunks after chunking.
 
         Returns:
             List of document chunks.
@@ -111,6 +127,7 @@ class PhaseOneRAG:
                 document_name=self.pdf_path.name,
                 chunk_size=chunk_size,
                 overlap=overlap,
+                cross_page_merge=cross_page_merge,
             )
         elif strategy == "section":
             chunks = section_aware_chunks(
@@ -119,17 +136,40 @@ class PhaseOneRAG:
                 document_name=self.pdf_path.name,
                 chunk_size=chunk_size,
                 overlap=overlap,
+                cross_page_merge=cross_page_merge,
+            )
+        elif strategy == "recursive":
+            chunks = recursive_page_chunks(
+                pages,
+                document_id=self._document_id(),
+                document_name=self.pdf_path.name,
+                chunk_size=chunk_size,
+                overlap=overlap,
+                cross_page_merge=cross_page_merge,
+            )
+        elif strategy == "semantic":
+            chunks = semantic_page_chunks(
+                pages,
+                document_id=self._document_id(),
+                document_name=self.pdf_path.name,
+                chunk_size=chunk_size,
+                overlap=overlap,
+                cross_page_merge=cross_page_merge,
             )
         else:
             raise ValueError(
                 f"Unsupported chunking strategy: {strategy!r}. "
-                "Use 'fixed' or 'section'."
+                "Use 'fixed', 'section', 'recursive', or 'semantic'."
             )
+
+        if deduplicate:
+            chunks = deduplicate_chunk_records(chunks)
 
         self._chunks = chunks
         self._embeddings = []
         self._retriever = None
         self.chunk_count = len(chunks)
+        self.chunk_quality = compute_chunk_quality(chunks)
         self.total_page_characters = len(
             "\n".join(
                 self._page_text(page)
@@ -142,6 +182,7 @@ class PhaseOneRAG:
         )
 
         return chunks
+
 
     def chunks_to_embeddings(
         self,
