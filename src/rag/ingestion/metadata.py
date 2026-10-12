@@ -19,11 +19,20 @@ class DocumentMetadata:
     def from_file(cls, file_path: str | Path, document_id: str | None = None) -> "DocumentMetadata":
         path = Path(file_path)
         filename = path.name
-        _document_id = document_id or f"doc_{filename}"
+        _document_id = document_id or f"doc_{path.stem}"
+        pages = 0
+        if path.exists() and path.suffix.lower() == ".pdf":
+            try:
+                import pymupdf
+                doc = pymupdf.open(path)
+                pages = len(doc)
+                doc.close()
+            except Exception:
+                pass
         return cls(
             document_id=_document_id,
             filename=filename,
             file_path=str(path),
-            pages=0,
+            pages=pages,
             authors=[],
         )

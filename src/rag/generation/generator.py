@@ -96,10 +96,7 @@ class Generator:
         for context_index, context in enumerate(contexts):
             text = str(context["text"])
 
-            sentences = re.split(
-                r"(?<=[.!?])\s+",
-                text,
-            )
+            sentences = self._split_sentences(text)
 
             context_priority = 1.0 / (context_index + 1)
 
@@ -188,18 +185,39 @@ class Generator:
             selected_contexts,
         )
 
-    @staticmethod
-    def _extract_terms(text: str) -> set[str]:
-        """Extract normalized terms used by the lexical baseline."""
+    DOMAIN_SHORT_TOKENS = frozenset({
+        "q", "k", "v", "h", "ai", "ml", "dl", "lr", "f1", "l1", "l2",
+    })
 
-        return {
-            term.lower()
-            for term in re.findall(
-                r"\b[\w'-]+\b",
-                text,
-            )
-            if len(term) > 2
-        }
+    @classmethod
+    def _split_sentences(cls, text: str) -> list[str]:
+        cleaned = text.strip()
+        if not cleaned:
+            return []
+        # Protect common abbreviations and decimal numbers from being split
+        protected = re.sub(
+            r"\b(e\.g\.|i\.e\.|et al\.|fig\.|eq\.|ref\.|sec\.|vol\.|no\.)",
+            lambda m: m.group(0).replace(".", "<DOT>"),
+            cleaned,
+            flags=re.IGNORECASE,
+        )
+        protected = re.sub(r"(\d+)\.(\d+)", r"\1<DOT>\2", protected)
+        raw_sentences = re.split(r"(?<=[.!?])\s+", protected)
+        return [
+            s.replace("<DOT>", ".").strip()
+            for s in raw_sentences
+            if s.strip()
+        ]
+
+    @classmethod
+    def _extract_terms(cls, text: str) -> set[str]:
+        """Extract normalized terms used by the lexical baseline."""
+        terms = set()
+        for term in re.findall(r"\b[\w'-]+\b", text):
+            t_lower = term.lower()
+            if len(t_lower) > 2 or t_lower in cls.DOMAIN_SHORT_TOKENS:
+                terms.add(t_lower)
+        return terms
 
     @staticmethod
     def _normalize_sentence(sentence: str) -> str:

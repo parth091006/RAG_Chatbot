@@ -174,7 +174,7 @@ SECTION_HEADINGS = (
 
 
 def section_aware_chunks(
-    pages: list[str],
+    pages: list[str | dict[str, object]],
     document_id: str,
     document_name: str,
     chunk_size: int = 250,
@@ -190,7 +190,8 @@ def section_aware_chunks(
     chunk_number = 1
     current_section = "Introduction"
 
-    for page_number, page_text in enumerate(pages, start=1):
+    for page_number, page_item in enumerate(pages, start=1):
+        page_text = page_item if isinstance(page_item, str) else str(page_item.get("text", ""))
         normalized_text = re.sub(r"\s+", " ", page_text).strip()
         matches = list(heading_pattern.finditer(normalized_text))
         boundaries = [0] + [match.start() for match in matches] + [len(normalized_text)]

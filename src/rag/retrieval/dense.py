@@ -17,11 +17,28 @@ def cosine_similarity(vec_a: list[float], vec_b: list[float]) -> float:
 class DenseRetriever:
     def __init__(self, embeddings: list[list[float]] | None = None):
         self.embeddings = embeddings or []
+        self._candidate_norms = [
+            math.sqrt(sum(b * b for b in candidate))
+            for candidate in self.embeddings
+        ]
 
     def search(self, query_embedding: list[float], top_k: int = 5) -> list[tuple[int, float]]:
+        if not self.embeddings or not query_embedding or top_k <= 0:
+            return []
+
+        norm_q = math.sqrt(sum(a * a for a in query_embedding))
+        if norm_q == 0.0:
+            return [(index, 0.0) for index in range(min(top_k, len(self.embeddings)))]
+
         ranked: list[tuple[int, float]] = []
         for index, candidate in enumerate(self.embeddings):
-            score = cosine_similarity(query_embedding, candidate)
+            norm_c = self._candidate_norms[index]
+            if norm_c == 0.0:
+                score = 0.0
+            else:
+                dot = sum(a * b for a, b in zip(query_embedding, candidate))
+                score = dot / (norm_q * norm_c)
             ranked.append((index, score))
+
         ranked.sort(key=lambda item: item[1], reverse=True)
         return ranked[:top_k]

@@ -226,7 +226,7 @@ def main() -> None:
     parser.add_argument(
         "--embedding-method",
         choices=["bow", "tfidf", "semantic"],
-        default="bow",
+        default="tfidf",
         help=(
             "Embedding method to evaluate: "
             "bow, tfidf, or semantic."

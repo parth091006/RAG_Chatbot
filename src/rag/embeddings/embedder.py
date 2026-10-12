@@ -47,12 +47,18 @@ class Embedder:
         )
         self._semantic_model = None
 
+    # Domain tokens preserved even when short (<= 2 chars)
+    DOMAIN_SHORT_TOKENS = frozenset({
+        "q", "k", "v", "h", "ai", "ml", "dl", "lr", "f1", "l1", "l2",
+    })
+
     def _tokenize(self, text: str) -> list[str]:
-        return [
-            token.lower()
-            for token in re.findall(r"\b[\w'-]+\b", text)
-            if len(token) > 2
-        ]
+        tokens = []
+        for token in re.findall(r"\b[\w'-]+\b", text):
+            t_lower = token.lower()
+            if len(t_lower) > 2 or t_lower in self.DOMAIN_SHORT_TOKENS:
+                tokens.append(t_lower)
+        return tokens
 
     def _load_semantic_model(self):
         """Load the sentence-transformers model only when semantic retrieval is used."""
